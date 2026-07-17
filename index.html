@@ -18,6 +18,7 @@
       --accent-light: #f5ede8;
       --border: #eae8e5;
       --shadow: rgba(44, 48, 46, 0.04);
+      --box-bg: #f9f8f6;
     }
 
     * {
@@ -155,7 +156,7 @@
       font-size: 0.8rem;
       color: var(--text-muted);
       font-weight: 400;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       display: flex;
       gap: 12px;
     }
@@ -165,9 +166,52 @@
       line-height: 1.6;
       color: var(--text-main);
       font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .attractions-box {
+      background-color: var(--box-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
       margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+    }
+
+    .attractions-box h3 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .attractions-list {
+      list-style: none;
+    }
+
+    .attractions-list li {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      font-weight: 400;
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 6px;
+    }
+
+    .attractions-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .attractions-list li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: var(--accent);
     }
 
     .button-group {
@@ -226,6 +270,16 @@
       <h2 class="route-title">Vicopisano ➔ Antibes</h2>
       <div class="route-info"><span>🇮🇹 ➔ 🇫🇷 Costa Azzurra</span><span>• <strong>400 Km</strong></span></div>
       <p class="description">Partenza ufficiale da Vicopisano. Tappa di trasferimento lungo la costa per raggiungere la Francia e fare base ad Antibes per la prima notte.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Varigotti & Capo Noli</strong>: scorci panoramici sulla vecchia via Aurelia.</li>
+          <li><strong>Mentone</strong>: le facciate pastello della prima cittadina francese dopo il confine.</li>
+          <li><strong>Antibes (Vieille Ville)</strong>: passeggiata serale tra i bastioni e il porto vecchio.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="btn btn-weather">Meteo Antibes</a>
@@ -238,6 +292,16 @@
       <h2 class="route-title">Antibes ➔ Verdon ➔ Malaucène</h2>
       <div class="route-info"><span>🇫🇷 Alta Provenza</span><span>• <strong>313 Km</strong></span></div>
       <p class="description">Giornata tra le curve di Comps-sur-Artuby e Aiguines nel cuore del Verdon, seguita dalla scalata del mitico Mont Ventoux con discesa su Malaucène.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Gorges du Verdon</strong>: balconi panoramici a picco sul canyon più grande d'Europa.</li>
+          <li><strong>Moustiers-Sainte-Marie</strong>: borgo medievale incastonato nella roccia calcarea.</li>
+          <li><strong>Mont Ventoux</strong>: il paesaggio lunare e desertico in cima allo storico Gigante della Provenza.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="btn btn-weather">Meteo Malaucène</a>
@@ -250,6 +314,16 @@
       <h2 class="route-title">Malaucène ➔ Gorges de l'Ardèche ➔ Saint-Flour</h2>
       <div class="route-info"><span>🇫🇷 Ardèche & Alvernia</span><span>• <strong>334 Km</strong></span></div>
       <p class="description">Si cavalcano le falesie e i canyon dell'Ardèche per poi piegare verso il Massiccio Centrale dell'Alvernia, fermando le moto a Saint-Flour.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Pont d'Arc</strong>: il monumentale arco di roccia naturale sul fiume Ardèche.</li>
+          <li><strong>Gorges de l'Ardèche</strong>: la panoramica Haute Corniche ricca di falesie calcaree.</li>
+          <li><strong>Saint-Flour</strong>: la cattedrale gotica in pietra lavica nera abbarbicata sulla rupe.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Saint-Flour,+France" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/saint-flour/francia" target="_blank" class="btn btn-weather">Meteo Saint-Flour</a>
@@ -262,6 +336,16 @@
       <h2 class="route-title">Saint-Flour ➔ Borghi del Périgord ➔ Brantôme</h2>
       <div class="route-info"><span>🇫🇷 Lot & Périgord</span><span>• <strong>356 Km</strong></span></div>
       <p class="description">Tappa ricca di borghi mozzafiato: Maurs, Figeac, lo splendido nido d'aquila di Saint-Cirq-Lapopie, Cahors e La Roque-Gageac, fino a Brantôme.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Saint-Cirq-Lapopie</strong>: borgo medievale sospeso su una rupe sopra il fiume Lot.</li>
+          <li><strong>La Roque-Gageac</strong>: case di pietra dorata allineate sotto una scogliera impressionante.</li>
+          <li><strong>Brantôme</strong>: la "Venezia del Périgord" con l'antica abbazia benedettina.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Saint-Flour,+France/Maurs,+France/Figeac,+France/Saint-Cirq-Lapopie,+France/Cahors,+France/La+Roque-Gageac,+France/Brantôme,+France" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/brant%C3%B4me/francia" target="_blank" class="btn btn-weather">Meteo Brantôme</a>
@@ -274,6 +358,16 @@
       <h2 class="route-title">Brantôme ➔ Bordeaux ➔ Cap Ferret</h2>
       <div class="route-info"><span>🇫🇷 Atlantico</span><span>• <strong>218 Km</strong></span></div>
       <p class="description">Discesa verso l'Oceano Atlantico passando per Bordeaux, puntando i fari direttamente sulla penisola di Cap Ferret per la notte.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Bordeaux Centro</strong>: la maestosa Place de la Bourse riflessa nello specchio d'acqua.</li>
+          <li><strong>Bacino di Arcachon</strong>: i piccoli villaggi di pescatori dedicati alla coltura delle ostriche.</li>
+          <li><strong>Faro di Cap Ferret</strong>: vista spettacolare sull'oceano e sulla duna di Pilat.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Brantôme,+France/Bordeaux,+France/Cap+Ferret,+Lège-Cap-Ferret,+France" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/l%C3%A8ge-cap-ferret/francia" target="_blank" class="btn btn-weather">Meteo Cap Ferret</a>
@@ -286,6 +380,16 @@
       <h2 class="route-title">Cap Ferret ➔ San Sebastián</h2>
       <div class="route-info"><span>🇫🇷 ➔ 🇪🇸 Paesi Baschi</span><span>• <strong>260 Km</strong></span></div>
       <p class="description">Si scende verso sud costeggiando le Landes per superare il confine spagnolo ed entrare nei Paesi Baschi. Notte a San Sebastián.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Foresta delle Landes</strong>: i rettilinei immersi tra le pinete costiere più grandi d'Europa.</li>
+          <li><strong>Biarritz</strong>: l'elegante architettura della costa e lo scoglio della Vergine.</li>
+          <li><strong>Playa de la Concha</strong>: la celebre baia a semiluna di San Sebastián (da girare a piedi).</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Cap+Ferret,+Lège-Cap-Ferret,+France/San+Sebastián,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/san-sebasti%C3%A1n/spagna" target="_blank" class="btn btn-weather">Meteo San Sebastián</a>
@@ -298,6 +402,16 @@
       <h2 class="route-title">San Sebastián ➔ SJPDP ➔ Roncisvalle ➔ Pamplona</h2>
       <div class="route-info"><span>🇫🇷 ➔ 🇪🇸 Valico Pirenaico</span><span>• <strong>195 Km</strong></span></div>
       <p class="description">Tappa spettacolare d'alta quota. Si va a Saint-Jean-Pied-de-Port per scalare i Pirenei via Col d'Arnosteguy (o Valcarlos in caso di nebbia), si scollina a Roncisvalle e si scende a Pamplona.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Saint-Jean-Pied-de-Port</strong>: antica cittadina fortificata e partenza ufficiale del Cammino.</li>
+          <li><strong>Col d'Arnosteguy</strong>: asfalto stretto e panorami pirenaici selvaggi d'alta quota.</li>
+          <li><strong>Collegiata di Roncisvalle</strong>: il celebre santuario gotico legato alle leggende di Orlando.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/San+Sebastián,+Spain/Saint-Jean-Pied-de-Port,+France/Roncesvalles,+Spain/Pamplona,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="btn btn-weather">Meteo Pamplona</a>
@@ -310,6 +424,16 @@
       <h2 class="route-title">Pamplona ➔ Jaca</h2>
       <div class="route-info"><span>🇪🇸 Aragona alta</span><span>• <strong>180 Km</strong></span></div>
       <p class="description">Taglio panoramico verso l'Aragona lungo le splendide strade pre-pirenaiche per raggiungere la città fortificata di Jaca.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Pamplona (Casco Viejo)</strong>: le vie storiche della corsa dei tori (San Fermín).</li>
+          <li><strong>Foz de Arbayún</strong>: imponente gola profonda intagliata dal fiume Salazar.</li>
+          <li><strong>Cittadella di Jaca</strong>: fortificazione pentagonale del XVI secolo perfettamente conservata.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Pamplona,+Spain/Jaca,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/jaca/spagna" target="_blank" class="btn btn-weather">Meteo Jaca</a>
@@ -322,6 +446,16 @@
       <h2 class="route-title">Jaca ➔ Aínsa</h2>
       <div class="route-info"><span>🇪🇸 Sobrarbe</span><span>• <strong>150 Km</strong></span></div>
       <p class="description">Puro godimento motociclistico attraverso l'Aragona, costeggiando il Parco Nazionale di Ordesa per fermarsi nello splendido borgo medievale di Aínsa.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Monastero di San Juan de la Peña</strong>: spettacolare chiesa medievale scavata sotto la roccia.</li>
+          <li><strong>Valle di Ordesa</strong>: vedute sulle pareti verticali e i canyon calcarei del parco nazionale.</li>
+          <li><strong>Plaza Mayor di Aínsa</strong>: straordinaria piazza medievale in pietra intatta.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Jaca,+Spain/Aínsa,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/ainsa/spagna" target="_blank" class="btn btn-weather">Meteo Aínsa</a>
@@ -334,6 +468,16 @@
       <h2 class="route-title">Aínsa ➔ Vielha</h2>
       <div class="route-info"><span>🇪🇸 Catalogna (Val d'Aran)</span><span>• <strong>170 Km</strong></span></div>
       <p class="description">Si entra nel vivo dei Pirenei catalani superando passi di montagna spettacolari fino a scendere nella splendida conca alpina di Vielha.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Collada de Fadas</strong>: passo montano guidato e panoramico a quota 1470m.</li>
+          <li><strong>Chiese Romaniche della Vall de Boí</strong>: patrimonio UNESCO celebre per l'architettura in pietra.</li>
+          <li><strong>Vielha centro</strong>: pittoresco capoluogo della Val d'Aran dall'atmosfera prettamente alpina.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Aínsa,+Spain/Vielha,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/vielha/spagna" target="_blank" class="btn btn-weather">Meteo Vielha</a>
@@ -346,6 +490,16 @@
       <h2 class="route-title">Vielha ➔ Puigcerdà</h2>
       <div class="route-info"><span>🇪🇸 Alta Cerdanya</span><span>• <strong>200 Km</strong></span></div>
       <p class="description">Tappa di alta montagna memorabile. Curve e asfalto perfetto che costeggiano il confine francese fino a raggiungere l'altopiano di Puigcerdà.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Port de la Bonaigua</strong>: leggendario valico motociclistico a 2.072 metri di quota.</li>
+          <li><strong>Sort</strong>: caratteristico borgo montano bagnato dal fiume Noguera Pallaresa.</li>
+          <li><strong>Puigcerdà</strong>: l'elegante laghetto urbano al confine franco-spagnolo.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Vielha,+Spain/Puigcerdà,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/puigcerda/spagna" target="_blank" class="btn btn-weather">Meteo Puigcerdà</a>
@@ -358,6 +512,16 @@
       <h2 class="route-title">Puigcerdà ➔ Ripoll ➔ Barcellona</h2>
       <div class="route-info"><span>🇪🇸 Discesa sulla Costa</span><span>• <strong>180 Km</strong></span></div>
       <p class="description">Si scende dai Pirenei passando per Ripoll, affrontando le ultime sezioni guidate prima di entrare nella vibrante cornice di Barcellona.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Collada de Toses</strong>: una delle strade a curve più famose di Spagna per asfalto e grip.</li>
+          <li><strong>Monastero di Ripoll</strong>: celebre per il monumentale portale in pietra del XII secolo.</li>
+          <li><strong>Tibidabo (Barcellona)</strong>: sosta panoramica sulla città prima di scendere in hotel.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
         <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-weather">Meteo Barcellona</a>
@@ -370,6 +534,16 @@
       <h2 class="route-title">Barcellona (Sosta)</h2>
       <div class="route-info"><span>🇪🇸 Giornata Relax</span><span>• <strong>0 Km</strong></span></div>
       <p class="description">Giornata di totale sosta e riposo a Barcellona. Ottima occasione per girare a piedi, ricaricare le batterie e fare manutenzione ordinaria alle moto.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Sagrada Família & Gotico</strong>: i capolavori di Gaudí e il cuore medievale.</li>
+          <li><strong>Barceloneta</strong>: passeggiata sul lungomare e pranzo a base di paella di pesce.</li>
+          <li><strong>Bunkers del Carmel</strong>: eccezionale punto di vista a 360 gradi al tramonto.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Barcelona,+Spain" target="_blank" class="btn btn-maps">Mappa di Barcellona</a>
         <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-weather">Meteo Barcellona</a>
@@ -382,6 +556,15 @@
       <h2 class="route-title">Barcellona ➔ Traghetto ➔ Civitavecchia</h2>
       <div class="route-info"><span>🚢 Grimaldi Lines</span><span>• <strong>Rientro</strong></span></div>
       <p class="description">Imbarco al mattino sul traghetto Grimaldi Lines (Cabina 4 posti esclusiva). Navigazione e riposo sul Mar Mediterraneo con arrivo previsto a Civitavecchia intorno alla mezzanotte.</p>
+      
+      <div class="attractions-box">
+        <h3>A bordo</h3>
+        <ul class="attractions-list">
+          <li><strong>Ponti Esterni</strong>: relax in navigazione al tramonto sul Mar Mediterraneo.</li>
+          <li><strong>Pianificazione</strong>: momento ideale in cabina/bar per il debriefing finale del viaggio.</li>
+        </ul>
+      </div>
+
       <div class="button-group">
         <a href="https://www.google.com/maps/dir/Port+of+Barcelona,+Barcelona,+Spain/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italy" target="_blank" class="btn btn-maps">Rotta Marittima</a>
         <a href="https://www.3bmeteo.com/meteo/civitavecchia" target="_blank" class="btn btn-weather">Meteo Civitavecchia</a>
