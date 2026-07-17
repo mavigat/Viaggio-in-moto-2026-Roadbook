@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Raid Moto 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-main: #1a1a1a;
+      --text-muted: #6c757d;
+      --accent: #d35400;
+      --accent-light: #fdf2e9;
+      --shadow: rgba(0, 0, 0, 0.06);
+      --border: #e9ecef;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      padding-bottom: 30px;
+    }
+
+    /* Header Fisso */
+    header {
+      background-color: var(--card-bg);
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Selettore dei Giorni Orizzontale (Swipeable) */
+    .day-selector-container {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      position: sticky;
+      top: 53px;
+      z-index: 10;
+    }
+
+    .day-selector {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 16px;
+      gap: 8px;
+      scrollbar-width: none; /* Rimuove barra su Firefox */
+    }
+
+    .day-selector::-webkit-scrollbar {
+      display: none; /* Rimuove barra su Chrome/Safari */
+    }
+
+    .day-btn {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      padding: 10px 16px;
+      border-radius: 20px;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .day-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 10px rgba(211, 84, 0, 0.2);
+    }
+
+    /* Contenitore Tappa */
+    .content-container {
+      padding: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .stage-card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px var(--shadow);
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .stage-card.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Dettagli della Tappa */
+    .meta-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background-color: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .route-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .route-info {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .route-info span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #333;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    /* Pulsanti Azione */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.1s ease, opacity 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-maps {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-weather {
+      background-color: #2c3e50;
+      color: #ffffff;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Raid Trans-Pirenaico 2026</h1>
+    <p>Tabella di marcia interattiva</p>
+  </header>
+
+  <!-- Menu di selezione orizzontale -->
+  <div class="day-selector-container">
+    <div class="day-selector" id="daySelector">
+      <!-- Generato via JavaScript per comodità -->
+    </div>
+  </div>
+
+  <!-- Contenuto delle tappe -->
+  <main class="content-container" id="stageContainer">
+    
+    <!-- Giorno 1 -->
+    <div class="stage-card active" data-day="1">
+      <span class="meta-badge">10 Agosto · Giorno 1</span>
+      <h2 class="route-title">Vicopisano ➔ Antibes</h2>
+      <div class="route-info">
+        <span>🇮🇹 ➔ 🇫🇷 Costa Azzurra</span>
+        <span>• <strong>400 Km</strong></span>
+      </div>
+      <p class="description">Partenza ufficiale da Vicopisano. Tappa di trasferimento lungo la costa per raggiungere la Francia e fare base ad Antibes per la prima notte. Pericolo traffico intenso in zona di confine.</p>
+      <div class="button-group">
+        <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Antibes (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 2 -->
+    <div class="stage-card" data-day="2">
+      <span class="meta-badge">11 Agosto · Giorno 2</span>
+      <h2 class="route-title">Antibes ➔ Verdon ➔ Mont Ventoux ➔ Malaucène</h2>
+      <div class="route-info">
+        <span>🇫🇷 Alta Provenza</span>
+        <span>• <strong>313 Km</strong></span>
+      </div>
+      <p class="description">Giornata spettacolare tra le curve di Comps-sur-Artuby e Aiguines nel cuore del Verdon, seguita dalla scalata del mitico Mont Ventoux con discesa su Malaucène. Attenzione alle forti raffiche in vetta.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Malaucène (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 3 -->
+    <div class="stage-card" data-day="3">
+      <span class="meta-badge">12 Agosto · Giorno 3</span>
+      <h2 class="route-title">Malaucène ➔ Gorges de l'Ardèche ➔ Saint-Flour</h2>
+      <div class="route-info">
+        <span>🇫🇷 Ardèche & Alvernia</span>
+        <span>• <strong>334 Km</strong></span>
+      </div>
+      <p class="description">Si cavalcano le falesie e i canyon dell'Ardèche per poi piegare verso il Massiccio Centrale dell'Alvernia, fermando le moto a Saint-Flour. Fondo asfalto rugoso e ottimo grip.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Saint-Flour,+France" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/saint-flour/francia" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Saint-Flour (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 4 -->
+    <div class="stage-card" data-day="4">
+      <span class="meta-badge">13 Agosto · Giorno 4</span>
+      <h2 class="route-title">Saint-Flour ➔ Borghi del Périgord ➔ Brantôme</h2>
+      <div class="route-info">
+        <span>🇫🇷 Lot & Périgord</span>
+        <span>• <strong>356 Km</strong></span>
+      </div>
+      <p class="description">Tappa ricca di borghi mozzafiato: Maurs, Figeac, lo splendido nido d'aquila di Saint-Cirq-Lapopie, Cahors e La Roque-Gageac, fino alla "Venezia del Périgord", Brantôme.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Saint-Flour,+France/Maurs,+France/Figeac,+France/Saint-Cirq-Lapopie,+France/Cahors,+France/La+Roque-Gageac,+France/Brantôme,+France" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/brant%C3%B4me/francia" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Brantôme (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 5 -->
+    <div class="stage-card" data-day="5">
+      <span class="meta-badge">14 Agosto · Giorno 5</span>
+      <h2 class="route-title">Brantôme ➔ Bordeaux ➔ Cap Ferret</h2>
+      <div class="route-info">
+        <span>🇫🇷 Atlantico</span>
+        <span>• <strong>218 Km</strong></span>
+      </div>
+      <p class="description">Discesa verso l'Oceano Atlantico passando per la splendida Bordeaux, puntando i fari direttamente sulla penisola di Cap Ferret per la notte.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Brantôme,+France/Bordeaux,+France/Cap+Ferret,+Lège-Cap-Ferret,+France" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/l%C3%A8ge-cap-ferret/francia" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Cap Ferret (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 6 -->
+    <div class="stage-card" data-day="6">
+      <span class="meta-badge">15 Agosto · Giorno 6</span>
+      <h2 class="route-title">Cap Ferret ➔ San Sebastián</h2>
+      <div class="route-info">
+        <span>🇫🇷 ➔ 🇪🇸 Paesi Baschi</span>
+        <span>• <strong>260 Km</strong></span>
+      </div>
+      <p class="description">Si scende verso sud costeggiando le grandi pinete delle Landes per superare il confine spagnolo ed entrare nei Paesi Baschi. Notte a San Sebastián.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Cap+Ferret,+Lège-Cap-Ferret,+France/San+Sebastián,+Spain" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/san-sebasti%C3%A1n/spagna" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo San Sebastián (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 7 -->
+    <div class="stage-card" data-day="7">
+      <span class="meta-badge">16 Agosto · Giorno 7</span>
+      <h2 class="route-title">San Sebastián ➔ Pamplona</h2>
+      <div class="route-info">
+        <span>🇪🇸 Navarra</span>
+        <span>• <strong>160 Km</strong></span>
+      </div>
+      <p class="description">Inizia l'avvicinamento e la vera scalata ai Pirenei. Tappa relativamente breve ma guidata attraverso le valli basche fino a Pamplona.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/San+Sebastián,+Spain/Pamplona,+Spain" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Pamplona (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- [I giorni successivi fino al 14 seguono esattamente lo stesso schema di ID e classi] -->
+
+  </main>
+
+  <script>
+    const totalDays = 7; // Puoi estenderlo a 14 semplicemente aggiungendo le card sopra
+    const selector = document.getElementById('daySelector');
+
+    // Genera al volo i pulsanti per il controllo sul telefono
+    for (let i = 1; i <= totalDays; i++) {
+      const btn = document.createElement('button');
+      btn.className = `day-btn ${i === 1 ? 'active' : ''}`;
+      btn.innerText = `Giorno ${i}`;
+      btn.onclick = () => switchDay(i, btn);
+      selector.appendChild(btn);
+    }
+
+    function switchDay(dayNumber, clickedButton) {
+      // Disattiva vecchi pulsanti e card
+      document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
+
+      // Attiva i nuovi elementi corretti
+      clickedButton.classList.add('active');
+      const targetCard = document.querySelector(`.stage-card[data-day="${dayNumber}"]`);
+      if (targetCard) targetCard.classList.add('active');
+
+      // Centra fluidamente il pulsante nello schermo del telefono durante lo swipe/click
+      clickedButton.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  </script>
+</body>
+</html>
