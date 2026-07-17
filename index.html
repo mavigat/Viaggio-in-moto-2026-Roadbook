@@ -1,581 +1,888 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Raid Moto 2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg-main: #f4f6f8;
-      --card-bg: rgba(255, 255, 255, 0.92); /* Leggermente trasparente per far intravedere lo sfondo */
-      --text-main: #1a1a1a;
-      --text-muted: #6c757d;
-      --accent: #d35400;
-      --accent-light: #fdf2e9;
-      --shadow: rgba(0, 0, 0, 0.08);
-      --border: rgba(233, 236, 239, 0.7);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROADBOOK: Trans-Pirenaico 2026</title>
+    <style>
+        :root {
+            --bg-color: #121824;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #f59e0b;
+            --accent-hover: #d97706;
+            --border: #334155;
+            --badge-bg: #27272a;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      padding-bottom: 30px;
-      position: relative;
-      min-height: 100vh;
-    }
+        header {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
 
-    /* Immagine di sfondo in trasparenza */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      /* Immagine evocativa dei Pirenei (Francia/Spagna) */
-      background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.12; /* Controllo trasparenza per non disturbare la lettura */
-      z-index: -1;
-      pointer-events: none;
-    }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
 
-    /* Header Fisso */
-    header {
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 16px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+        header p {
+            margin: 5px 0 0 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
 
-    header h1 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+        .nav-container {
+            position: sticky;
+            top: 0;
+            background-color: rgba(18, 24, 36, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 15px 10px;
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            gap: 8px;
+            justify-content: flex-start;
+        }
 
-    header p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
+        .nav-container::-webkit-scrollbar {
+            height: 4px;
+        }
+        .nav-container::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 2px;
+        }
 
-    /* Selettore dei Giorni Orizzontale (Swipeable) */
-    .day-selector-container {
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 0;
-      position: sticky;
-      top: 53px;
-      z-index: 10;
-    }
+        .nav-btn {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
 
-    .day-selector {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 0 16px;
-      gap: 8px;
-      scrollbar-width: none;
-    }
+        .nav-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
 
-    .day-selector::-webkit-scrollbar {
-      display: none;
-    }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px 60px 15px;
+        }
 
-    .day-btn {
-      flex: 0 0 auto;
-      scroll-snap-align: start;
-      padding: 10px 16px;
-      border-radius: 20px;
-      background-color: rgba(233, 236, 239, 0.6);
-      border: 1px solid var(--border);
-      font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-main);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+        .day-section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            scroll-margin-top: 80px;
+        }
 
-    .day-btn.active {
-      background-color: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-      box-shadow: 0 4px 10px rgba(211, 84, 0, 0.2);
-    }
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-    /* Contenitore Tappa */
-    .content-container {
-      padding: 16px;
-      max-width: 500px;
-      margin: 0 auto;
-    }
+        .day-title h2 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--accent);
+        }
 
-    .stage-card {
-      background-color: var(--card-bg);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 6px 16px var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      display: none;
-    }
+        .day-title p {
+            margin: 3px 0 0 0;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
 
-    .stage-card.active {
-      display: block;
-      animation: fadeIn 0.25s ease-out;
-    }
+        .day-links {
+            display: flex;
+            gap: 8px;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: background 0.2s;
+        }
 
-    /* Dettagli della Tappa */
-    .meta-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      background-color: var(--accent-light);
-      color: var(--accent);
-      font-size: 0.75rem;
-      font-weight: 700;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
+        .action-link:hover {
+            background-color: var(--border);
+            border-color: var(--text-muted);
+        }
 
-    .route-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
+        .action-link.maps { color: #4ade80; border-color: rgba(74, 222, 128, 0.3); }
+        .action-link.meteo { color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
 
-    .route-info {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 16px;
-      display: flex;
-      gap: 12px;
-    }
+        .route-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .route-info span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+        .route-row {
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+            padding: 12px 0;
+            display: grid;
+            grid-template-columns: 75px 1fr;
+            gap: 10px;
+        }
 
-    .description {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #333;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px dashed #e9ecef;
-    }
+        .route-row:last-child {
+            border-bottom: none;
+        }
 
-    /* Pulsanti Azione */
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+        .km-indicator {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--accent);
+            text-align: left;
+        }
 
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: transform 0.1s ease, opacity 0.2s;
-    }
+        .km-indicator .parziale {
+            font-size: 10px;
+            color: var(--text-muted);
+            display: block;
+            font-weight: normal;
+        }
 
-    .btn:active {
-      transform: scale(0.98);
-    }
+        .loc-info .loc-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    .btn-maps {
-      background-color: var(--accent);
-      color: #ffffff;
-    }
+        .loc-info .loc-notes {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
 
-    .btn-weather {
-      background-color: #2c3e50;
-      color: #ffffff;
-    }
+        .badge {
+            font-size: 9px;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .b-start { background-color: #10b981; }
+        .b-pieno { background-color: #3b82f6; }
+        .b-sosta { background-color: #6366f1; }
+        .b-hotel { background-color: #475569; }
+        .b-alert { background-color: #ef4444; }
+        .b-passo { background-color: #8b5cf6; }
+        .b-pranzo { background-color: #f97316; }
 
-    .btn svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-  </style>
+        .global-tips {
+            background-color: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .global-tips h4 {
+            margin: 0 0 5px 0;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .day-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .day-links {
+                justify-content: space-between;
+            }
+            .action-link {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>Raid Trans-Pirenaico 2026</h1>
-    <p>Tabella di marcia interattiva</p>
-  </header>
+    <header>
+        <h1>Trans-Pirenaico 2026</h1>
+        <p>Vicopisano ➔ Barcellona | Roadbook Digitale Interattivo</p>
+    </header>
 
-  <!-- Menu di selezione orizzontale -->
-  <div class="day-selector-container">
-    <div class="day-selector" id="daySelector"></div>
-  </div>
-
-  <!-- Contenuto delle tappe -->
-  <main class="content-container" id="stageContainer">
-    
-    <!-- Giorno 1 -->
-    <div class="stage-card active" data-day="1">
-      <span class="meta-badge">10 Agosto · Giorno 1</span>
-      <h2 class="route-title">Vicopisano ➔ Antibes</h2>
-      <div class="route-info">
-        <span>🇮🇹 ➔ 🇫🇷 Costa Azzurra</span>
-        <span>• <strong>400 Km</strong></span>
-      </div>
-      <p class="description">Partenza ufficiale da Vicopisano. Tappa di trasferimento lungo la costa per raggiungere la Francia e fare base ad Antibes per la prima notte. Pericolo traffico intenso in zona di confine.</p>
-      <div class="button-group">
-        <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Antibes (3B)
-        </a>
-      </div>
+    <div class="nav-container">
+        <a href="#g1" class="nav-btn">G1</a>
+        <a href="#g2" class="nav-btn">G2</a>
+        <a href="#g3" class="nav-btn">G3</a>
+        <a href="#g4" class="nav-btn">G4</a>
+        <a href="#g5" class="nav-btn">G5</a>
+        <a href="#g6" class="nav-btn">G6</a>
+        <a href="#g7" class="nav-btn">G7</a>
+        <a href="#g8" class="nav-btn">G8</a>
+        <a href="#g9" class="nav-btn">G9</a>
+        <a href="#g10" class="nav-btn">G10</a>
+        <a href="#g11" class="nav-btn">G11</a>
+        <a href="#g12" class="nav-btn">G12</a>
+        <a href="#g13" class="nav-btn">G13-14</a>
     </div>
 
-    <!-- Giorno 2 -->
-    <div class="stage-card" data-day="2">
-      <span class="meta-badge">11 Agosto · Giorno 2</span>
-      <h2 class="route-title">Antibes ➔ Verdon ➔ Mont Ventoux ➔ Malaucène</h2>
-      <div class="route-info">
-        <span>🇫🇷 Alta Provenza</span>
-        <span>• <strong>313 Km</strong></span>
-      </div>
-      <p class="description">Giornata spettacolare tra le curve di Comps-sur-Artuby e Aiguines nel cuore del Verdon, seguita dalla scalata del mitico Mont Ventoux con discesa su Malaucène. Attenzione alle forti raffiche in vetta.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Malaucène (3B)
-        </a>
-      </div>
-    </div>
+    <main>
 
-    <!-- Giorno 3 -->
-    <div class="stage-card" data-day="3">
-      <span class="meta-badge">12 Agosto · Giorno 3</span>
-      <h2 class="route-title">Malaucène ➔ Gorges de l'Ardèche ➔ Saint-Flour</h2>
-      <div class="route-info">
-        <span>🇫🇷 Ardèche & Alvernia</span>
-        <span>• <strong>334 Km</strong></span>
-      </div>
-      <p class="description">Si cavalcano le falesie e i canyon dell'Ardèche per poi piegare verso il Massiccio Centrale dell'Alvernia, fermando le moto a Saint-Flour. Fondo asfalto rugoso e ottimo grip.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Saint-Flour,+France" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/saint-flour/francia" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Saint-Flour (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 1 -->
+        <div class="day-section" id="g1">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 1 (10 Agosto)</h2>
+                    <p>Vicopisano ➔ Antibes (400 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Vicopisano/Ventimiglia/%C3%89ze/Antibes/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Vicopisano</div>
+                        <div class="loc-notes">Reset contachilometri. Pressione gomme ok. Controllo bagagli.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">230 Km<span class="parziale">+230 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pieno">Rifornimento</span> Confine di Stato (Ventimiglia)</div>
+                        <div class="loc-notes">Autostrada A10. Ultimo pieno in Italia prima di entrare in Francia (prezzi più alti).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">320 Km<span class="parziale">+90 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-sosta">Sosta</span> Éze (Bassa Cornice)</div>
+                        <div class="loc-notes">Pausa caffè con vista panoramica sulla costa.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">400 Km<span class="parziale">+80 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Antibes</div>
+                        <div class="loc-notes">Sistemazione hotel. Richiedere tassativamente un parcheggio moto sicuro al coperto o custodito.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 4 -->
-    <div class="stage-card" data-day="4">
-      <span class="meta-badge">13 Agosto · Giorno 4</span>
-      <h2 class="route-title">Saint-Flour ➔ Borghi del Périgord ➔ Brantôme</h2>
-      <div class="route-info">
-        <span>🇫🇷 Lot & Périgord</span>
-        <span>• <strong>356 Km</strong></span>
-      </div>
-      <p class="description">Tappa ricca di borghi mozzafiato: Maurs, Figeac, lo splendido nido d'aquila di Saint-Cirq-Lapopie, Cahors e La Roque-Gageac, fino alla "Venezia del Périgord", Brantôme.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Saint-Flour,+France/Maurs,+France/Figeac,+France/Saint-Cirq-Lapopie,+France/Cahors,+France/La+Roque-Gageac,+France/Brantôme,+France" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/brant%C3%B4me/francia" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Brantôme (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 2 -->
+        <div class="day-section" id="g2">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 2 (11 Agosto)</h2>
+                    <p>Antibes ➔ Malaucène (313 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Antibes/Castellane/Aiguines/Forcalquier/Mont+Ventoux/Malauc%C3%A8ne/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Antibes</div>
+                        <div class="loc-notes">Direzione Grasse ➔ Route Napoléon (D6085).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">95 Km<span class="parziale">+95 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Attenzione</span> Castellane / Comps-sur-Artuby</div>
+                        <div class="loc-notes">Ingresso zona Canyon. Asfalto tecnico, curve strette. Guidare con marce basse.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">130 Km<span class="parziale">+35 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-sosta">Sosta</span> Aiguines (Gole del Verdon)</div>
+                        <div class="loc-notes">Sosta foto sulla sponda sud (Corniche Sublime) e vista spettacolare sul Lago di Sainte-Croix.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">210 Km<span class="parziale">+80 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pranzo">Pranzo</span> Forcalquier</div>
+                        <div class="loc-notes">Pausa pranzo veloce ed idratazione.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">295 Km<span class="parziale">+85 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-passo">Passo</span> Mont Ventoux (Vetta)</div>
+                        <div class="loc-notes">Scalata dal versante sud. Scenario lunare. Attenzione al vento forte in cresta che destabilizza la moto.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">313 Km<span class="parziale">+18 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Malaucène</div>
+                        <div class="loc-notes">Discesa tecnica. Fine tappa.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 5 -->
-    <div class="stage-card" data-day="5">
-      <span class="meta-badge">14 Agosto · Giorno 5</span>
-      <h2 class="route-title">Brantôme ➔ Bordeaux ➔ Cap Ferret</h2>
-      <div class="route-info">
-        <span>🇫🇷 Atlantico</span>
-        <span>• <strong>218 Km</strong></span>
-      </div>
-      <p class="description">Discesa verso l'Oceano Atlantico passando per la splendida Bordeaux, puntando i fari direttamente sulla penisola di Cap Ferret per la notte.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Brantôme,+France/Bordeaux,+France/Cap+Ferret,+Lège-Cap-Ferret,+France" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/l%C3%A8ge-cap-ferret/francia" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Cap Ferret (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 3 -->
+        <div class="day-section" id="g3">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 3 (12 Agosto)</h2>
+                    <p>Malaucène ➔ Saint-Flour (334 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Malauc%C3%A8ne/Gorges+de+l'Ard%C3%A8che/Villefort/Mende/Saint-Flour/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/saint-flour/francia" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Malaucène</div>
+                        <div class="loc-notes">Direzione Vallon-Pont-d'Arc via D290.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">110 Km<span class="parziale">+110 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Attenzione</span> Gorges de l'Ardèche</div>
+                        <div class="loc-notes">Spettacolare strada panoramica sulla falesia. Fondo ottimo ma possibili camper e rallentamenti.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">180 Km<span class="parziale">+70 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pranzo">Pranzo</span> Villefort</div>
+                        <div class="loc-notes">Pranzo vicino al lago artificiale.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">260 Km<span class="parziale">+80 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pieno">Rifornimento</span> Mende</div>
+                        <div class="loc-notes">Rifornimento prima del Massiccio Centrale (Alvernia), le pompe diventano più rare.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">334 Km<span class="parziale">+74 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Saint-Flour</div>
+                        <div class="loc-notes">Cittadella medievale. Parcheggio in zona alta.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 6 -->
-    <div class="stage-card" data-day="6">
-      <span class="meta-badge">15 Agosto · Giorno 6</span>
-      <h2 class="route-title">Cap Ferret ➔ San Sebastián</h2>
-      <div class="route-info">
-        <span>🇫🇷 ➔ 🇪🇸 Paesi Baschi</span>
-        <span>• <strong>260 Km</strong></span>
-      </div>
-      <p class="description">Si scende verso sud costeggiando le grandi pinete delle Landes per superare il confine spagnolo ed entrare nei Paesi Baschi. Notte a San Sebastián.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Cap+Ferret,+Lège-Cap-Ferret,+France/San+Sebastián,+Spain" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/san-sebasti%C3%A1n/spagna" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo San Sebastián (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 4 -->
+        <div class="day-section" id="g4">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 4 (13 Agosto)</h2>
+                    <p>Saint-Flour ➔ Brantôme (356 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Saint-Flour/Figeac/Saint-Cirq-Lapopie/Cahors/La+Roque-Gageac/Brant%C3%B4me/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/brant%C3%B4me/francia" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Saint-Flour</div>
+                        <div class="loc-notes">Direzione sud-ovest verso il dipartimento del Lot.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">105 Km<span class="parziale">+105 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-sosta">Sosta</span> Figeac</div>
+                        <div class="loc-notes">Pausa caffè e controllo moto rapido.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">145 Km<span class="parziale">+40 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Attenzione</span> Saint-Cirq-Lapopie</div>
+                        <div class="loc-notes">Strada stretta a ridosso della roccia. Parcheggio moto dedicato all'ingresso del borgo.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">175 Km<span class="parziale">+30 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pranzo">Pranzo</span> Cahors</div>
+                        <div class="loc-notes">Pranzo nei pressi del Pont Valentré.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">235 Km<span class="parziale">+60 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-sosta">Sosta</span> La Roque-Gageac</div>
+                        <div class="loc-notes">Sosta lungo il fiume Dordogna. Scenario da cartolina. Case incastonate nella roccia.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">356 Km<span class="parziale">+121 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Brantôme</div>
+                        <div class="loc-notes">Ingresso nel Périgord Verde. Località suggestiva circondata dall'acqua.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 7 -->
-    <div class="stage-card" data-day="7">
-      <span class="meta-badge">16 Agosto · Giorno 7</span>
-      <h2 class="route-title">San Sebastián ➔ Pamplona</h2>
-      <div class="route-info">
-        <span>🇪🇸 Navarra</span>
-        <span>• <strong>160 Km</strong></span>
-      </div>
-      <p class="description">Inizia l'avvicinamento e la vera scalata ai Pirenei. Tappa relativamente breve ma guidata attraverso le valli basche fino a Pamplona.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/San+Sebastián,+Spain/Pamplona,+Spain" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Pamplona (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 5 -->
+        <div class="day-section" id="g5">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 5 (14 Agosto)</h2>
+                    <p>Brantôme ➔ Cap Ferret (218 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Brant%C3%B4me/Bordeaux/L%C3%A8ge-Cap-Ferret/Cap+Ferret/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/l%C3%A8ge-cap-ferret/francia" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Brantôme</div>
+                        <div class="loc-notes">Direzione Bergerac ➔ Bordeaux.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">130 Km<span class="parziale">+130 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Attenzione</span> Bordeaux (Rocade)</div>
+                        <div class="loc-notes">Tangenziale trafficata e nervosa. Prestare attenzione ai repentini cambi corsia delle auto.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">180 Km<span class="parziale">+50 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pieno">Rifornimento</span> Lège-Cap-Ferret</div>
+                        <div class="loc-notes">Fare il pieno prima di entrare nella penisola (pompe assenti o molto care dopo).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">218 Km<span class="parziale">+38 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Cap Ferret</div>
+                        <div class="loc-notes">Vista sul Bacino di Arcachon e Duna di Pilat di fronte. Per andare sulla Duna via terra servono 70km, consigliato il battello turistico pedonale.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 8 -->
-    <div class="stage-card" data-day="8">
-      <span class="meta-badge">17 Agosto · Giorno 8</span>
-      <h2 class="route-title">Pamplona ➔ Formigal (Passo del Portalet)</h2>
-      <div class="route-info">
-        <span>🇪🇸 Aragona</span>
-        <span>• <strong>180 Km</strong></span>
-      </div>
-      <p class="description">Ingresso nel cuore dei Pirenei Aragonesi. Strade panoramiche ad alta quota con asfalto perfetto. Tappa intermedia a Formigal, vicino al confine francese del Portalet.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Pamplona,+Spain/Formigal,+Spain" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/sallent-de-gallego/spagna" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Formigal (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 6 -->
+        <div class="day-section" id="g6">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 6 (15 Agosto)</h2>
+                    <p>Cap Ferret ➔ San Sebastián (260 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Cap+Ferret/Mimizan+Plage/Ir%C3%BAn/San+Sebasti%C3%A1n/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/san+sebastian/spagna" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Cap Ferret</div>
+                        <div class="loc-notes">Risalita della penisola e discesa verso le Landes (D652).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">140 Km<span class="parziale">+140 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pranzo">Pranzo</span> Mimizan Plage</div>
+                        <div class="loc-notes">Pausa pranzo vicino all'oceano. Strade molto rettilinee tra i pini (attenzione ai colpi di sonno).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">235 Km<span class="parziale">+95 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Confine</span> Confine FR ➔ ES (Irún)</div>
+                        <div class="loc-notes">Ingresso in Spagna. Cambio regime autostradale (AP-8). Segnaletica in spagnolo/basco.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">260 Km<span class="parziale">+25 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> San Sebastián</div>
+                        <div class="loc-notes">Pausa Tapas (Pintxos) d'obbligo nella parte vecchia. Sistemazione in hotel.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 9 -->
-    <div class="stage-card" data-day="9">
-      <span class="meta-badge">18 Agosto · Giorno 9</span>
-      <h2 class="route-title">Formigal ➔ Vielha (Val d'Aran)</h2>
-      <div class="route-info">
-        <span>🇪🇸 Catalogna</span>
-        <span>• <strong>210 Km</strong></span>
-      </div>
-      <p class="description">Attraversamento della spettacolare asse pirenaica N-260 (la strada sacra dei motociclisti spagnoli) toccando i valichi alpini più importanti fino alla Val d'Aran.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Formigal,+Spain/Vielha,+Spain" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/vielha-e-mijaran/spagna" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Vielha (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 7 -->
+        <div class="day-section" id="g7">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 7 (16 Agosto)</h2>
+                    <p>San Sebastián ➔ Pamplona (160 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/San+Sebasti%C3%A1n/Pamplona/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> San Sebastián</div>
+                        <div class="loc-notes">Ingresso nell'entroterra basco / Navarra (N-121-A).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">80 Km<span class="parziale">+80 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Attenzione</span> Passi della Navarra</div>
+                        <div class="loc-notes">Inizio curve pirenaiche. Fondo potenzialmente viscido/umido se c'è nebbia mattutina ("sirimiri").</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">160 Km<span class="parziale">+80 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Pamplona</div>
+                        <div class="loc-notes">Sistemazione comoda. Tappa breve: pomeriggio libero per visitare la città della corsa dei tori.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 10 -->
-    <div class="stage-card" data-day="10">
-      <span class="meta-badge">19 Agosto · Giorno 10</span>
-      <h2 class="route-title">Vielha ➔ Andorra la Vella</h2>
-      <div class="route-info">
-        <span>🇪🇸 ➔ 🇦🇩 Andorra</span>
-        <span>• <strong>140 Km</strong></span>
-      </div>
-      <p class="description">Tappa breve ma intensa di curve e tornanti. Ingresso nel piccolo principato di Andorra per il check-in in hotel e pomeriggio dedicato al relax o alla manutenzione delle moto.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Vielha,+Spain/Andorra+la+Vella,+Andorra" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/andorra-la-vella/andorra" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Andorra (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 8 -->
+        <div class="day-section" id="g8">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 8 (17 Agosto)</h2>
+                    <p>Pamplona ➔ Jaca (180 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Pamplona/Monasterio+de+San+Juan+de+la+Pe%C3%B1a/Jaca/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/jaca/spagna" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Pamplona</div>
+                        <div class="loc-notes">Direzione Est via N-240 lungo il bacino di Yesa. Costeggia l'acqua.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">95 Km<span class="parziale">+95 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-sosta">Sosta</span> Monastero di San Juan de la Peña</div>
+                        <div class="loc-notes">Deviazione consigliata su magnifica strada panoramica nel bosco. Monastero incastonato sotto la roccia.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">140 Km<span class="parziale">+45 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Attenzione</span> Valle d'Hecho / Ansó</div>
+                        <div class="loc-notes">Opzione asfalto stretto per amanti della guida pura e selvaggia.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">180 Km<span class="parziale">+40 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Jaca</div>
+                        <div class="loc-notes">Splendida cittadella fortificata aragonese. Sistemazione.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 11 -->
-    <div class="stage-card" data-day="11">
-      <span class="meta-badge">20 Agosto · Giorno 11</span>
-      <h2 class="route-title">Andorra ➔ Roses (Costa Brava)</h2>
-      <div class="route-info">
-        <span>🇦🇩 ➔ 🇪🇸 Costa Brava</span>
-        <span>• <strong>240 Km</strong></span>
-      </div>
-      <p class="description">Discesa finale dai Pirenei verso il Mar Mediterraneo. Arrivo a Roses sulla Costa Brava, completando idealmente la traversata coast-to-coast.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Andorra+la+Vella,+Andorra/Roses,+Spain" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/roses/spagna" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Roses (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 9 -->
+        <div class="day-section" id="g9">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 9 (18 Agosto)</h2>
+                    <p>Jaca ➔ Aínsa (150 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Jaca/Puerto+de+Cotefablo/Broto/A%C3%ADnsa/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/a%C3%ADnsa/spagna" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Jaca</div>
+                        <div class="loc-notes">Direzione Biescas ➔ Imbocco N-260 (Eje Pirenaico).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">60 Km<span class="parziale">+60 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-passo">Passo</span> Puerto de Cotefablo (1.423m)</div>
+                        <div class="loc-notes">Tratto guidato molto divertente e ritmico. Fondo perfetto.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">90 Km<span class="parziale">+30 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pranzo">Pranzo</span> Broto / Parco Ordesa</div>
+                        <div class="loc-notes">Pausa pranzo ai piedi dei maestosi canyon pirenaici. Vista unica.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">150 Km<span class="parziale">+60 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Aínsa</div>
+                        <div class="loc-notes">Parcheggiare con cautela nella Plaza Mayor (ciottoli storici instabili per le moto). Borgo arroccato.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 12 -->
-    <div class="stage-card" data-day="12">
-      <span class="meta-badge">21 Agosto · Giorno 12</span>
-      <h2 class="route-title">Roses ➔ Arles</h2>
-      <div class="route-info">
-        <span>🇪🇸 ➔ 🇫🇷 Camargue</span>
-        <span>• <strong>290 Km</strong></span>
-      </div>
-      <p class="description">Inizio del viaggio di rientro in Italia. Si risale la costa francese superando Perpignan e Montpellier fino a raggiungere la splendida Arles alle porte della Camargue.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Roses,+Spain/Arles,+France" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/arles/francia" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Arles (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 10 -->
+        <div class="day-section" id="g10">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 10 (19 Agosto)</h2>
+                    <p>Aínsa ➔ Vielha (170 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/A%C3%ADnsa/Coll+de+Fadas/Vielha/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/vielha/spagna" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Aínsa</div>
+                        <div class="loc-notes">N-260 direzione Castejón de Sos.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">85 Km<span class="parziale">+85 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-passo">Passo</span> Coll de Fadas (1.470m)</div>
+                        <div class="loc-notes">Successione spettacolare di curve veloci e ampie. Spettacolo puro.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">130 Km<span class="parziale">+45 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Attenzione</span> Tunnel di Vielha (N-230)</div>
+                        <div class="loc-notes">Galleria monotubo molto lunga (5 Km). Fortissimo sbalzo termico: freddo in ingresso, caldo e asfissiante dentro per i camion. Tenere visiera pulita.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">170 Km<span class="parziale">+40 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Vielha</div>
+                        <div class="loc-notes">Capitale della Val d'Aran. Clima e atmosfera tipicamente alpini.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 13 -->
-    <div class="stage-card" data-day="13">
-      <span class="meta-badge">22 Agosto · Giorno 13</span>
-      <h2 class="route-title">Arles ➔ Nizza</h2>
-      <div class="route-info">
-        <span>🇫🇷 Provenza & Costa Azzurra</span>
-        <span>• <strong>240 Km</strong></span>
-      </div>
-      <p class="description">Attraversamento della Provenza interna, evitando l'autostrada ove possibile per godersi gli ultimi scorci collinari francesi prima di fermarsi a Nizza.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Arles,+France/Nice,+France" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/nizza/francia" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Nizza (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 11 -->
+        <div class="day-section" id="g11">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 11 (20 Agosto)</h2>
+                    <p>Vielha ➔ Puigcerdà (200 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Vielha/Port+de+la+Bonaigua/Sort/Collada+de+Toses/Puigcerd%C3%A0/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/puigcerd%C3%A0/spagna" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Vielha</div>
+                        <div class="loc-notes">C-28 verso il mitico Port de la Bonaigua.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">25 Km<span class="parziale">+25 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-passo">Passo</span> Port de la Bonaigua (2.072m)</div>
+                        <div class="loc-notes">Punto più alto del viaggio. Attenzione: possibile presenza di mucche o cavalli liberi in traiettoria oltre le curve.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">110 Km<span class="parziale">+85 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-pranzo">Pranzo</span> Sort</div>
+                        <div class="loc-notes">Famosa cittadina sul fiume, ottima per una sosta pranzo e relax.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">160 Km<span class="parziale">+50 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-passo">Passo</span> Collada de Toses (GI-400)</div>
+                        <div class="loc-notes">La mecca dei motociclisti catalani. Oltre 40 km di curve non stop raccordate e asfalto perfetto.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">200 Km<span class="parziale">+40 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Puigcerdà</div>
+                        <div class="loc-notes">Splendido altopiano della Cerdanya. Sistemazione hotel.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Giorno 14 -->
-    <div class="stage-card" data-day="14">
-      <span class="meta-badge">23 Agosto · Giorno 14</span>
-      <h2 class="route-title">Nizza ➔ Vicopisano</h2>
-      <div class="route-info">
-        <span>🇫🇷 ➔ 🇮🇹 Rientro</span>
-        <span>• <strong>350 Km</strong></span>
-      </div>
-      <p class="description">Ultima tappa. Rientro in Italia via Aurelia/Autostrada della Cisa o della costa ligure per concludere il viaggio a Vicopisano. Fine del Raid.</p>
-      <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Nice,+France/Vicopisano,+PI,+Italy" target="_blank" class="btn btn-maps">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Avvia Google Maps
-        </a>
-        <a href="https://www.3bmeteo.com/meteo/vicopisano" target="_blank" class="btn btn-weather">
-          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
-          Meteo Vicopisano (3B)
-        </a>
-      </div>
-    </div>
+        <!-- GIORNO 12 -->
+        <div class="day-section" id="g12">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 12 (21 Agosto) <span style="font-size:12px; color:#4ade80;">[OTTIMIZZATO]</span></h2>
+                    <p>Puigcerdà ➔ Barcellona (195 Km)</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/dir/Puigcerd%C3%A0/Tunel+del+Cad%C3%AD/Ripoll/Barcellona/" target="_blank" class="action-link maps">🗺️ Mappa</a>
+                    <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="action-link meteo">☀️ Meteo</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">0 Km<span class="parziale">+0 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Partenza</span> Puigcerdà</div>
+                        <div class="loc-notes">Discesa verso sud tramite la C-16 / E-9 (evita di rifare la Collada de Toses al contrario).</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">25 Km<span class="parziale">+25 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Tunnel</span> Tunnel del Cadí</div>
+                        <div class="loc-notes">Passaggio rapido sotto la barriera montuosa (tratto a pedaggio). Discesa verso Bagà.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">45 Km<span class="parziale">+20 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-passo">Passo</span> Deviazione C-26 (Guardiola de Berguedà)</div>
+                        <div class="loc-notes">Taglio guidato verso est su asfalto perfetto e curve ritmiche nel bosco fino a Ripoll. Strada molto amata dai locals.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">75 Km<span class="parziale">+30 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-sosta">Sosta</span> Ripoll</div>
+                        <div class="loc-notes">Sosta caffè davanti al monastero romanico di Santa Maria.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">145 Km<span class="parziale">+70 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-alert">Traffico</span> Ingresso Area Metropolitana</div>
+                        <div class="loc-notes">Tramite C-17. Traffico intenso e rapido in avvicinamento a Barcellona. Attenzione agli scooter cittadini. Mantieni la corsia.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">195 Km<span class="parziale">+50 Km</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Arrivo</span> Barcellona</div>
+                        <div class="loc-notes">Arrivo definitivo. Sistemazione immediata della moto in un garage custodito per le prossime 2 notti.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  </main>
+        <!-- GIORNO 13 & 14 -->
+        <div class="day-section" id="g13">
+            <div class="day-header">
+                <div class="day-title">
+                    <h2>GIORNO 13 & 14 (22-23 Agosto)</h2>
+                    <p>Barcellona & Rientro in Italia</p>
+                </div>
+                <div class="day-links">
+                    <a href="https://www.google.com/maps/place/Port+de+Barcelona/" target="_blank" class="action-link maps">🗺️ Porto</a>
+                    <a href="https://www.3bmeteo.com/meteo/civitavecchia" target="_blank" class="action-link meteo">☀️ Meteo Civitavecchia</a>
+                </div>
+            </div>
+            <div class="route-table">
+                <div class="route-row">
+                    <div class="km-indicator">22 Ago<span class="parziale">STOP</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-hotel">Sosta</span> Barcellona Totale</div>
+                        <div class="loc-notes">Moto ferme in garage custodito. Giornata interamente a piedi o con i mezzi pubblici per visitare la città in sicurezza.</div>
+                    </div>
+                </div>
+                <div class="route-row">
+                    <div class="km-indicator">23 Ago<span class="parziale">SHIP</span></div>
+                    <div class="loc-info">
+                        <div class="loc-name"><span class="badge b-start">Imbarco</span> Grimaldi Lines</div>
+                        <div class="loc-notes">Presentarsi al porto di Barcellona con <b>almeno 2 ore di anticipo</b>. Tenere a portata di mano cinghie supplementari personali e uno straccio per bloccare la moto sul ponte evitando graffi. Arrivo a Civitavecchia a mezzanotte.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="global-tips">
+                <h4>💡 NOTA DI VIAGGIO TRAGHETTO</h4>
+                Preparate una piccola borsa da tenere con voi in cabina prima di scendere nel ponte garage del traghetto. Una volta lasciata la moto e avviata la navigazione, l'accesso ai garage è severamente vietato fino all'attracco a Civitavecchia.
+            </div>
+        </div>
 
-  <script>
-    const totalDays = 14; 
-    const selector = document.getElementById('daySelector');
+    </main>
 
-    for (let i = 1; i <= totalDays; i++) {
-      const btn = document.createElement('button');
-      btn.className = `day-btn ${i === 1 ? 'active' : ''}`;
-      btn.innerText = `Giorno ${i}`;
-      btn.onclick = () => switchDay(i, btn);
-      selector.appendChild(btn);
-    }
-
-    function switchDay(dayNumber, clickedButton) {
-      document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
-
-      clickedButton.classList.add('active');
-      const targetCard = document.querySelector(`.stage-card[data-day="${dayNumber}"]`);
-      if (targetCard) targetCard.classList.add('active');
-
-      clickedButton.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-      });
-    }
-  </script>
 </body>
 </html>
