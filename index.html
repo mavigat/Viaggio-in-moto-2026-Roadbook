@@ -10,14 +10,14 @@
   
   <style>
     :root {
-      --bg-main: #f8f9fa;
-      --card-bg: #ffffff;
+      --bg-main: #f4f6f8;
+      --card-bg: rgba(255, 255, 255, 0.92); /* Leggermente trasparente per far intravedere lo sfondo */
       --text-main: #1a1a1a;
       --text-muted: #6c757d;
       --accent: #d35400;
       --accent-light: #fdf2e9;
-      --shadow: rgba(0, 0, 0, 0.06);
-      --border: #e9ecef;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --border: rgba(233, 236, 239, 0.7);
     }
 
     * {
@@ -32,11 +32,32 @@
       background-color: var(--bg-main);
       color: var(--text-main);
       padding-bottom: 30px;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Immagine di sfondo in trasparenza */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* Immagine evocativa dei Pirenei (Francia/Spagna) */
+      background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12; /* Controllo trasparenza per non disturbare la lettura */
+      z-index: -1;
+      pointer-events: none;
     }
 
     /* Header Fisso */
     header {
-      background-color: var(--card-bg);
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       padding: 16px;
       text-align: center;
       border-bottom: 1px solid var(--border);
@@ -60,7 +81,9 @@
 
     /* Selettore dei Giorni Orizzontale (Swipeable) */
     .day-selector-container {
-      background-color: var(--card-bg);
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
       padding: 12px 0;
       position: sticky;
@@ -74,11 +97,11 @@
       scroll-snap-type: x mandatory;
       padding: 0 16px;
       gap: 8px;
-      scrollbar-width: none; /* Rimuove barra su Firefox */
+      scrollbar-width: none;
     }
 
     .day-selector::-webkit-scrollbar {
-      display: none; /* Rimuove barra su Chrome/Safari */
+      display: none;
     }
 
     .day-btn {
@@ -86,7 +109,7 @@
       scroll-snap-align: start;
       padding: 10px 16px;
       border-radius: 20px;
-      background-color: var(--bg-main);
+      background-color: rgba(233, 236, 239, 0.6);
       border: 1px solid var(--border);
       font-family: inherit;
       font-size: 0.85rem;
@@ -112,10 +135,12 @@
 
     .stage-card {
       background-color: var(--card-bg);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       border-radius: 16px;
       padding: 20px;
-      box-shadow: 0 4px 12px var(--shadow);
-      border: 1px solid var(--border);
+      box-shadow: 0 6px 16px var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       display: none;
     }
 
@@ -170,7 +195,7 @@
       color: #333;
       margin-bottom: 20px;
       padding-bottom: 16px;
-      border-bottom: 1px dashed var(--border);
+      border-bottom: 1px dashed #e9ecef;
     }
 
     /* Pulsanti Azione */
@@ -223,9 +248,7 @@
 
   <!-- Menu di selezione orizzontale -->
   <div class="day-selector-container">
-    <div class="day-selector" id="daySelector">
-      <!-- Generato via JavaScript per comodità -->
-    </div>
+    <div class="day-selector" id="daySelector"></div>
   </div>
 
   <!-- Contenuto delle tappe -->
@@ -378,15 +401,159 @@
       </div>
     </div>
 
-    <!-- [I giorni successivi fino al 14 seguono esattamente lo stesso schema di ID e classi] -->
+    <!-- Giorno 8 -->
+    <div class="stage-card" data-day="8">
+      <span class="meta-badge">17 Agosto · Giorno 8</span>
+      <h2 class="route-title">Pamplona ➔ Formigal (Passo del Portalet)</h2>
+      <div class="route-info">
+        <span>🇪🇸 Aragona</span>
+        <span>• <strong>180 Km</strong></span>
+      </div>
+      <p class="description">Ingresso nel cuore dei Pirenei Aragonesi. Strade panoramiche ad alta quota con asfalto perfetto. Tappa intermedia a Formigal, vicino al confine francese del Portalet.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Pamplona,+Spain/Formigal,+Spain" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/sallent-de-gallego/spagna" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Formigal (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 9 -->
+    <div class="stage-card" data-day="9">
+      <span class="meta-badge">18 Agosto · Giorno 9</span>
+      <h2 class="route-title">Formigal ➔ Vielha (Val d'Aran)</h2>
+      <div class="route-info">
+        <span>🇪🇸 Catalogna</span>
+        <span>• <strong>210 Km</strong></span>
+      </div>
+      <p class="description">Attraversamento della spettacolare asse pirenaica N-260 (la strada sacra dei motociclisti spagnoli) toccando i valichi alpini più importanti fino alla Val d'Aran.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Formigal,+Spain/Vielha,+Spain" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/vielha-e-mijaran/spagna" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Vielha (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 10 -->
+    <div class="stage-card" data-day="10">
+      <span class="meta-badge">19 Agosto · Giorno 10</span>
+      <h2 class="route-title">Vielha ➔ Andorra la Vella</h2>
+      <div class="route-info">
+        <span>🇪🇸 ➔ 🇦🇩 Andorra</span>
+        <span>• <strong>140 Km</strong></span>
+      </div>
+      <p class="description">Tappa breve ma intensa di curve e tornanti. Ingresso nel piccolo principato di Andorra per il check-in in hotel e pomeriggio dedicato al relax o alla manutenzione delle moto.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Vielha,+Spain/Andorra+la+Vella,+Andorra" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/andorra-la-vella/andorra" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Andorra (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 11 -->
+    <div class="stage-card" data-day="11">
+      <span class="meta-badge">20 Agosto · Giorno 11</span>
+      <h2 class="route-title">Andorra ➔ Roses (Costa Brava)</h2>
+      <div class="route-info">
+        <span>🇦🇩 ➔ 🇪🇸 Costa Brava</span>
+        <span>• <strong>240 Km</strong></span>
+      </div>
+      <p class="description">Discesa finale dai Pirenei verso il Mar Mediterraneo. Arrivo a Roses sulla Costa Brava, completando idealmente la traversata coast-to-coast.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Andorra+la+Vella,+Andorra/Roses,+Spain" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/roses/spagna" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Roses (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 12 -->
+    <div class="stage-card" data-day="12">
+      <span class="meta-badge">21 Agosto · Giorno 12</span>
+      <h2 class="route-title">Roses ➔ Arles</h2>
+      <div class="route-info">
+        <span>🇪🇸 ➔ 🇫🇷 Camargue</span>
+        <span>• <strong>290 Km</strong></span>
+      </div>
+      <p class="description">Inizio del viaggio di rientro in Italia. Si risale la costa francese superando Perpignan e Montpellier fino a raggiungere la splendida Arles alle porte della Camargue.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Roses,+Spain/Arles,+France" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/arles/francia" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Arles (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 13 -->
+    <div class="stage-card" data-day="13">
+      <span class="meta-badge">22 Agosto · Giorno 13</span>
+      <h2 class="route-title">Arles ➔ Nizza</h2>
+      <div class="route-info">
+        <span>🇫🇷 Provenza & Costa Azzurra</span>
+        <span>• <strong>240 Km</strong></span>
+      </div>
+      <p class="description">Attraversamento della Provenza interna, evitando l'autostrada ove possibile per godersi gli ultimi scorci collinari francesi prima di fermarsi a Nizza.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Arles,+France/Nice,+France" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/nizza/francia" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Nizza (3B)
+        </a>
+      </div>
+    </div>
+
+    <!-- Giorno 14 -->
+    <div class="stage-card" data-day="14">
+      <span class="meta-badge">23 Agosto · Giorno 14</span>
+      <h2 class="route-title">Nizza ➔ Vicopisano</h2>
+      <div class="route-info">
+        <span>🇫🇷 ➔ 🇮🇹 Rientro</span>
+        <span>• <strong>350 Km</strong></span>
+      </div>
+      <p class="description">Ultima tappa. Rientro in Italia via Aurelia/Autostrada della Cisa o della costa ligure per concludere il viaggio a Vicopisano. Fine del Raid.</p>
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Nice,+France/Vicopisano,+PI,+Italy" target="_blank" class="btn btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Avvia Google Maps
+        </a>
+        <a href="https://www.3bmeteo.com/meteo/vicopisano" target="_blank" class="btn btn-weather">
+          <svg viewBox="0 0 24 24"><path d="M6.05 8.05c-2.73 2.73-2.73 7.15 0 9.88 2.73 2.73 7.15 2.73 9.88 0 2.41-2.41 2.68-6.11 0.81-8.81L12 14l-5.95-5.95zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L12 16l5.79-5.79c.13.58.21 1.17.21 1.79 0 4.08-3.05 7.44-7 7.93z"/></svg>
+          Meteo Vicopisano (3B)
+        </a>
+      </div>
+    </div>
 
   </main>
 
   <script>
-    const totalDays = 7; // Puoi estenderlo a 14 semplicemente aggiungendo le card sopra
+    const totalDays = 14; 
     const selector = document.getElementById('daySelector');
 
-    // Genera al volo i pulsanti per il controllo sul telefono
     for (let i = 1; i <= totalDays; i++) {
       const btn = document.createElement('button');
       btn.className = `day-btn ${i === 1 ? 'active' : ''}`;
@@ -396,16 +563,13 @@
     }
 
     function switchDay(dayNumber, clickedButton) {
-      // Disattiva vecchi pulsanti e card
       document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
 
-      // Attiva i nuovi elementi corretti
       clickedButton.classList.add('active');
       const targetCard = document.querySelector(`.stage-card[data-day="${dayNumber}"]`);
       if (targetCard) targetCard.classList.add('active');
 
-      // Centra fluidamente il pulsante nello schermo del telefono durante lo swipe/click
       clickedButton.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
