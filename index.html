@@ -348,7 +348,7 @@
       color: #fff;
     }
 
-    /* Coordinate percentuali ricalcolate per evitare sovrapposizioni */
+    /* Coordinate percentuali invariate per non toccare la mappa */
     .pin-civitavecchia { top: 61%; left: 60%; }
     .pin-vicopisano    { top: 54%; left: 56%; }
     .pin-antibes       { top: 51%; left: 47%; }
@@ -414,7 +414,7 @@
       <div class="metrics-summary-grid">
         <div class="metric-summary-box">
           <span class="metric-summary-lbl">Giorni Totali</span>
-          <span class="metric-summary-val">9 Giorni</span>
+          <span class="metric-summary-val">10 Giorni</span>
         </div>
         <div class="metric-summary-box">
           <span class="metric-summary-lbl">Km Totali Tracciato</span>
@@ -703,10 +703,43 @@
       </div>
     </div>
 
+    <!-- Giorno 10 -->
+    <div class="stage-card" data-day="10">
+      <span class="meta-badge">19-21 Agosto · Giorno 10</span>
+      <h2 class="route-title">Barcellona (Relax &amp; Imbarco)</h2>
+      <div class="route-info">
+        <div><span>🇪🇸 ➔ 🇮🇹 Rientro via mare</span></div>
+        <div class="route-metrics-row">
+          <div class="metrics-left">
+            <span class="metric-item">🚢 <strong>Tragitto in Nave</strong> · 🕒 <strong>Partenza ore 22:45</strong></span>
+            <span class="total-km-badge">Fine Raid Moto</span>
+          </div>
+          <div class="action-buttons-3d">
+            <a href="https://www.google.com/maps/search/Porto+di+Barcellona" target="_blank" class="btn-action btn-maps" title="Mappa Porto Barcellona"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Barcellona"><span>☀️</span></a>
+          </div>
+        </div>
+      </div>
+      <p class="description">Giornata di totale relax a Barcellona per godersi la città senza impegni in moto, passeggiando tra le Ramblas, il Barrio Gótico o rilassandosi in spiaggia, in attesa dell'imbarco serale per il rientro in Italia.</p>
+      
+      <div class="attractions-box">
+        <h3>Dettagli e Preventivo Viaggio di Ritorno (Nave)</h3>
+        <ul class="attractions-list">
+          <li><strong>Rotta</strong>: Barcellona ➔ Civitavecchia (21/08/2026 ore 22:45 ➔ 22/08/2026 ore 21:30)</li>
+          <li><strong>sistemazione</strong>: Cabina Interna Uso Esclusivo (max 4 persone) e imbarco per 2 Moto o scooter.</li>
+        </ul>
+      </div>
+
+      <!-- Immagine Preventivo Nave -->
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="preventivo nave.png" alt="Preventivo Nave Barcellona Civitavecchia" class="map-img">
+      </div>
+    </div>
+
   </main>
 
   <script>
-    const totalDays = 9;
+    const totalDays = 10;
 
     function initNavigation() {
       const selector = document.getElementById('daySelector');
