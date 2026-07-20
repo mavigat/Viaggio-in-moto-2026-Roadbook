@@ -154,18 +154,28 @@
     }
 
     .route-info {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       font-weight: 400;
       margin-bottom: 18px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
-    .route-info div {
+    .route-metrics {
       display: flex;
+      flex-wrap: wrap;
       gap: 12px;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .metric-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-main);
     }
 
     .total-km-badge {
@@ -177,7 +187,7 @@
       border-radius: 4px;
       border: 1px solid var(--border);
       display: inline-block;
-      margin-top: 4px;
+      margin-top: 2px;
       width: fit-content;
     }
 
@@ -244,6 +254,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       padding: 12px;
       border-radius: 8px;
       text-decoration: none;
@@ -289,7 +300,11 @@
       <span class="meta-badge">10 Agosto · Giorno 1</span>
       <h2 class="route-title">Vicopisano ➔ Antibes</h2>
       <div class="route-info">
-        <div><span>🇮🇹 ➔ 🇫🇷 Costa Azzurra</span><span>• <strong>400 Km</strong></span></div>
+        <div><span>🇮🇹 ➔ 🇫🇷 Costa Azzurra</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>400 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~4h 30m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 400 Km</span>
       </div>
       <p class="description">Partenza ufficiale da Vicopisano. Tappa di trasferimento lungo la costa per raggiungere la Francia e fare base ad Antibes per la prima notte.</p>
@@ -304,7 +319,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="btn btn-weather">Meteo Antibes</a>
       </div>
     </div>
@@ -314,7 +329,11 @@
       <span class="meta-badge">11 Agosto · Giorno 2</span>
       <h2 class="route-title">Antibes ➔ Verdon ➔ Malaucène</h2>
       <div class="route-info">
-        <div><span>🇫🇷 Alta Provenza</span><span>• <strong>313 Km</strong></span></div>
+        <div><span>🇫🇷 Alta Provenza</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>313 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~5h 45m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 713 Km</span>
       </div>
       <p class="description">Giornata tra le curve di Comps-sur-Artuby e Aiguines nel cuore del Verdon, seguita dalla scalata del mitico Mont Ventoux con discesa su Malaucène.</p>
@@ -329,7 +348,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="btn btn-weather">Meteo Malaucène</a>
       </div>
     </div>
@@ -339,7 +358,11 @@
       <span class="meta-badge">12 Agosto · Giorno 3</span>
       <h2 class="route-title">Malaucène ➔ Gorges de l'Ardèche ➔ Aurillac</h2>
       <div class="route-info">
-        <div><span>🇫🇷 Ardèche & Cantal</span><span>• <strong>340 Km</strong></span></div>
+        <div><span>🇫🇷 Ardèche & Cantal</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>340 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~5h 30m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 1.053 Km</span>
       </div>
       <p class="description">Si lasciano le terre del Ventoux per attraversare i canyon dell'Ardèche, risalendo poi verso il Massiccio Centrale fino ad Aurillac.</p>
@@ -354,7 +377,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Viaduc+de+Garabit,+France/Aurillac,+France" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Viaduc+de+Garabit,+France/Aurillac,+France" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/aurillac/francia" target="_blank" class="btn btn-weather">Meteo Aurillac</a>
       </div>
     </div>
@@ -364,7 +387,11 @@
       <span class="meta-badge">13 Agosto · Giorno 4</span>
       <h2 class="route-title">Aurillac ➔ Valle della Dordogna ➔ Bordeaux</h2>
       <div class="route-info">
-        <div><span>🇫🇷 Périgord Nero</span><span>• <strong>310 Km</strong></span></div>
+        <div><span>🇫🇷 Périgord Nero</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>310 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~4h 45m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 1.363 Km</span>
       </div>
       <p class="description">Tappa densissima nel cuore del Périgord Nero: si segue la Dordogna toccando Beaulieu, Creysse, Souillac, Sarlat, La Roque-Gageac e i siti preistorici di Les Eyzies, prima dell'allungo verso Bordeaux.</p>
@@ -379,7 +406,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Aurillac/Beaulieu-sur-Dordogne/Port+de+Creysse/Souillac/Sarlat-la-Can%C3%A9da/La+Roque-Gageac/Les+Eyzies/Bordeaux" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/Aurillac/Beaulieu-sur-Dordogne/Port+de+Creysse/Souillac/Sarlat-la-Can%C3%A9da/La+Roque-Gageac/Les+Eyzies/Bordeaux" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/bordeaux/francia" target="_blank" class="btn btn-weather">Meteo Bordeaux</a>
       </div>
     </div>
@@ -389,7 +416,11 @@
       <span class="meta-badge">14 Agosto · Giorno 5</span>
       <h2 class="route-title">Bordeaux ➔ San Sebastián</h2>
       <div class="route-info">
-        <div><span>🇫🇷 ➔ 🇪🇸 Paesi Baschi</span><span>• <strong>240 Km</strong></span></div>
+        <div><span>🇫🇷 ➔ 🇪🇸 Paesi Baschi</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>240 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~2h 45m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 1.603 Km</span>
       </div>
       <p class="description">Si scende verso sud costeggiando il golfo di Guascogna e superando il confine spagnolo per entrare nei Paesi Baschi. Notte a San Sebastián.</p>
@@ -404,7 +435,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Bordeaux,+France/San+Sebastián,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/Bordeaux,+France/San+Sebastián,+Spain" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/san-sebasti%C3%A1n/spagna" target="_blank" class="btn btn-weather">Meteo San Sebastián</a>
       </div>
     </div>
@@ -414,7 +445,11 @@
       <span class="meta-badge">15 Agosto · Giorno 6</span>
       <h2 class="route-title">San Sebastián ➔ SJPDP ➔ Roncisvalle ➔ Pamplona</h2>
       <div class="route-info">
-        <div><span>Valico Pirenaico</span><span>• <strong>195 Km</strong></span></div>
+        <div><span>Valico Pirenaico</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>195 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~4h 15m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 1.798 Km</span>
       </div>
       <p class="description">Tappa spettacolare d'alta quota. Si va a Saint-Jean-Pied-de-Port per scalare i Pirenei via Col d'Arnosteguy, si scollina a Roncisvalle e si scende a Pamplona.</p>
@@ -422,14 +457,14 @@
       <div class="attractions-box">
         <h3>Geografia e Sapori della Tappa</h3>
         <ul class="attractions-list">
-          <li><strong>Saint-Jean-Pied-de-Port</strong>: Cittadella fortificata in arenaria rossa sui contrafforti dei Pirenei. Zona di confine rinomata per il formaggio ovino *Ossau-Iraty* e per i salumi di maiale nero basco.</li>
+          <li><strong>Saint-Jean-Pied-de-Port</strong>: Cittadella fortificata in arenaria rossa sui contrafforti dei Pirenei. Zona di confine rinomata for il formaggio ovino *Ossau-Iraty* e per i salumi di maiale nero basco.</li>
           <li><strong>Col d'Arnosteguy & Roncisvalle</strong>: Valico pirenaico selvaggio e strettissimo circondato da pascoli brulli d'alta quota. A Roncisvalle, storico punto di accoglienza dei pellegrini, i menu offrono la classica *Trucha a la Navarra* (trota di fiume farcita con prosciutto crudo e fritta).</li>
           <li><strong>Pamplona</strong>: Città fortificata nota in tutto il mondo per la festa di San Fermín. Nei bar di Plaza del Castillo regnano i *Pinchos* navarresi, i peperoni *Pimientos del Piquillo* ripieni di baccalà e il *Pacharán*, liquore digestivo tradizionale a base di prugnole selvatiche e anice.</li>
         </ul>
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/San+Sebastián,+Spain/Saint-Jean-Pied-de-Port,+France/Roncesvalles,+Spain/Pamplona,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/San+Sebastián,+Spain/Saint-Jean-Pied-de-Port,+France/Roncesvalles,+Spain/Pamplona,+Spain" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="btn btn-weather">Meteo Pamplona</a>
       </div>
     </div>
@@ -439,7 +474,11 @@
       <span class="meta-badge">16 Agosto · Giorno 7</span>
       <h2 class="route-title">Pamplona ➔ Jaca ➔ Aínsa</h2>
       <div class="route-info">
-        <div><span>🇪🇸 Tappa Aragonese No-Autostrada</span><span>• <strong>285 Km</strong></span></div>
+        <div><span>🇪🇸 Tappa Aragonese No-Autostrada</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>285 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~5h 00m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 2.083 Km</span>
       </div>
       <p class="description">Tappa pre-pirenaica interamente su strade statali. Si evita la via rapida passando per la spettacolare Foz de Arbayún sulla NA-150, sosta alla Cittadella di Jaca e valico tecnico del Puerto de Cotefablo sulla N-260 prima dell'arrivo al borgo in pietra di Aínsa.</p>
@@ -448,13 +487,13 @@
         <h3>Geografia e Sapori della Tappa</h3>
         <ul class="attractions-list">
           <li><strong>Foz de Arbayún</strong>: Una gola calcarea verticale profonda oltre 300 metri scavata dal fiume Salazar, regno del grifone pirenaico. In questa zona della Navarra interna spiccano i formaggi di pecora DOP *Roncal*.</li>
-          <li><strong>Jaca & Alto Aragona</strong>: Antica capitale del regno d'Aragona, conserva una monumentale fortezza pentagonale cinquecentesca. A tavola domina il *Ternasco de Aragón IGP* (agnello da latte cucinato al forno con patate) e i dolci artigianali *Lazos de Jaca*.</li>
+          <li><strong>Jaca & Alto Aragona</strong>: Antica capitale del regno d'Aragona, conserva una monumentale fortezza pentagonale cinquecentesca. A tavola domina il *Ternasco de Aragón IGP* (agnello da latte cucinato al forno con patate) e i dolci artigianali *Lazos di Jaca*.</li>
           <li><strong>Puerto de Cotefablo & Aínsa</strong>: Il passo sulla N-260 taglia gole rocciose spettacolari. L'arrivo è ad Aínsa, borgo medievale arroccato alla confluenza di due fiumi. Da gustare i piatti a base di cacciagione e i funghi selvatici raccolti nei vicini boschi di Ordesa.</li>
         </ul>
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Pamplona,+Spagna/Mirador+de+la+Foz+de+Arbay%C3%BAn,+NA-178,+Spagna/Jaca,+Spagna/Puerto+de+Cotefablo,+22622,+Huesca,+Spagna/A%C3%ADnsa,+Spagna" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/Pamplona,+Spagna/Mirador+de+la+Foz+de+Arbay%C3%BAn,+NA-178,+Spagna/Jaca,+Spagna/Puerto+de+Cotefablo,+22622,+Huesca,+Spagna/A%C3%ADnsa,+Spagna" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/ainsa/spagna" target="_blank" class="btn btn-weather">Meteo Aínsa</a>
       </div>
     </div>
@@ -464,7 +503,11 @@
       <span class="meta-badge">17 Agosto · Giorno 8 [Tappa Maratona]</span>
       <h2 class="route-title">Aínsa ➔ Vielha ➔ Puigcerdà</h2>
       <div class="route-info">
-        <div><span>🇪🇸 I grandi valichi Pirenaici</span><span>• <strong>245 Km</strong></span></div>
+        <div><span>🇪🇸 I grandi valichi Pirenaici</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>245 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~5h 45m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 2.328 Km</span>
       </div>
       <p class="description">Tappa regina d'alta quota che unisce il cuore dell'Aragona alla Cerdanya. Si superano in sequenza la Collada de Fadas, il Tunnel alpino di Vielha, il colossale Port de la Bonaigua (2.072m) e la vallata di Sort, fino a raggiungere il confine a Puigcerdà.</p>
@@ -480,7 +523,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/A%C3%ADnsa,+Spagna/Castej%C3%B3n+de+Sos,+Spagna/Collada+de+Fadas,+Spagna/Vielha,+Spagna/Port+de+la+Bonaigua,+Spagna/Sort,+Spagna/Puigcerd%C3%A0,+Spagna" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/A%C3%ADnsa,+Spagna/Castej%C3%B3n+de+Sos,+Spagna/Collada+de+Fadas,+Spagna/Vielha,+Spagna/Port+de+la+Bonaigua,+Spagna/Sort,+Spagna/Puigcerd%C3%A0,+Spagna" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/puigcerda/spagna" target="_blank" class="btn btn-weather">Meteo Puigcerdà</a>
       </div>
     </div>
@@ -490,7 +533,11 @@
       <span class="meta-badge">18 Agosto · Giorno 9</span>
       <h2 class="route-title">Puigcerdà ➔ Ripoll ➔ Barcellona</h2>
       <div class="route-info">
-        <div><span>🇪🇸 Discesa sulla Costa</span><span>• <strong>180 Km</strong></span></div>
+        <div><span>🇪🇸 Discesa sulla Costa</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>180 Km</strong></span>
+          <span class="metric-item">🕒 <strong>~3h 30m</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 2.508 Km</span>
       </div>
       <p class="description">Si scende definitivamente dai Pirenei passando per Ripoll, affrontando le ultime splendide sezioni guidate prima di entrare a Barcellona.</p>
@@ -505,7 +552,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona,+Spain" target="_blank" class="btn btn-maps">🗺️🏁 Visualizza Mappa Itinerario</a>
         <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-weather">Meteo Barcellona</a>
       </div>
     </div>
@@ -515,7 +562,11 @@
       <span class="meta-badge">19 Agosto · Giorno 10</span>
       <h2 class="route-title">Barcellona (Sosta)</h2>
       <div class="route-info">
-        <div><span>🇪🇸 Giornata Relax</span><span>• <strong>0 Km</strong></span></div>
+        <div><span>🇪🇸 Giornata Relax</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🏍️ <strong>0 Km</strong></span>
+          <span class="metric-item">🕒 <strong>Sosta Totale</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: 2.508 Km</span>
       </div>
       <p class="description">Giornata di totale sosta e riposo a Barcellona. Ottima occasione per girare a piedi, ricaricare le batterie e godersi la città.</p>
@@ -530,7 +581,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Barcelona,+Spain" target="_blank" class="btn btn-maps">Mappa di Barcellona</a>
+        <a href="https://www.google.com/maps/dir/Barcelona,+Spain" target="_blank" class="btn btn-maps">🗺️🏁 Apri Piantina Città</a>
         <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-weather">Meteo Barcellona</a>
       </div>
     </div>
@@ -540,7 +591,11 @@
       <span class="meta-badge">20 Agosto · Giorno 11</span>
       <h2 class="route-title">Barcellona ➔ Traghetto ➔ Civitavecchia</h2>
       <div class="route-info">
-        <div><span>🚢 Grimaldi Lines</span><span>• <strong>Rientro</strong></span></div>
+        <div><span>🚢 Grimaldi Lines</span></div>
+        <div class="route-metrics">
+          <span class="metric-item">🚢 <strong>Imbarco</strong></span>
+          <span class="metric-item">🕒 <strong>~20h Navigazione</strong></span>
+        </div>
         <span class="total-km-badge">Progressivo: Navigazione</span>
       </div>
       <p class="description">Imbarco al mattino sul traghetto Grimaldi Lines (Cabina esclusiva). Navigazione e riposo sul Mar Mediterraneo con arrivo previsto a Civitavecchia intorno alla mezzanotte.</p>
@@ -554,7 +609,7 @@
       </div>
 
       <div class="button-group">
-        <a href="https://www.google.com/maps/dir/Port+of+Barcelona,+Barcelona,+Spain/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italy" target="_blank" class="btn btn-maps">Rotta Marittima</a>
+        <a href="https://www.google.com/maps/dir/Port+of+Barcelona,+Barcelona,+Spain/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italy" target="_blank" class="btn btn-maps">🗺️🏁 Rotta Marittima</a>
         <a href="https://www.3bmeteo.com/meteo/civitavecchia" target="_blank" class="btn btn-weather">Meteo Civitavecchia</a>
       </div>
     </div>
