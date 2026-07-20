@@ -1,43 +1,561 @@
-<!-- Nuovo Giorno 3 -->
-<div class="stage-card" data-day="3">
-  <span class="meta-badge">12 Agosto · Giorno 3</span>
-  <h2 class="route-title">Malaucène ➔ Gorges de l'Ardèche ➔ Aurillac</h2>
-  <div class="route-info"><span>🇫🇷 Ardèche & Cantal</span><span>• <strong>340 Km</strong></span></div>
-  <p class="description">Si lasciano le terre del Ventoux per attraversare i canyon dell'Ardèche, risalendo poi verso il Massiccio Centrale fino ad Aurillac.</p>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Raid Moto 2026 - Roadbook Ottimizzato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   
-  <div class="attractions-box">
-    <h3>Da non perdere</h3>
-    <ul class="attractions-list">
-      <li><strong>Pont d'Arc</strong>: monumentale arco di roccia naturale sul fiume Ardèche.</li>
-      <li><strong>Viadotto di Garabit</strong>: lo spettacolare ponte ferroviario in ferro battuto di Gustave Eiffel.</li>
-      <li><strong>Aurillac</strong>: capoluogo del Cantal, racchiuso tra le montagne vulcaniche.</li>
-    </ul>
+  <style>
+    :root {
+      --bg-main: #fcfbfa;
+      --card-bg: #ffffff;
+      --text-main: #2c302e;
+      --text-muted: #707571;
+      --accent: #b86b4c;
+      --accent-light: #f5ede8;
+      --border: #eae8e5;
+      --shadow: rgba(44, 48, 46, 0.04);
+      --box-bg: #f9f8f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      padding-bottom: 40px;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.25;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      padding: 24px 16px 16px 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+    }
+
+    header p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
+
+    .day-selector-container {
+      background-color: rgba(252, 251, 250, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      position: sticky;
+      top: 69px;
+      z-index: 10;
+    }
+
+    .day-selector {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 0 16px;
+      gap: 6px;
+      scrollbar-width: none;
+    }
+
+    .day-selector::-webkit-scrollbar {
+      display: none;
+    }
+
+    .day-btn {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background-color: transparent;
+      border: 1px solid transparent;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .day-btn.active {
+      background-color: var(--accent-light);
+      color: var(--accent);
+      border-color: transparent;
+      font-weight: 500;
+    }
+
+    .content-container {
+      padding: 24px 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .stage-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 20px var(--shadow), 0 1px 2px var(--shadow);
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .stage-card.active {
+      display: block;
+      animation: fadeIn 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .meta-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .route-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      line-height: 1.25;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .route-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: 18px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .description {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .attractions-box {
+      background-color: var(--box-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .attractions-box h3 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .attractions-list {
+      list-style: none;
+    }
+
+    .attractions-list li {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      font-weight: 400;
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 6px;
+    }
+
+    .attractions-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .attractions-list li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: var(--accent);
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-maps { 
+      background-color: var(--text-main); 
+      color: #ffffff; 
+    }
+    .btn-maps:active {
+      background-color: #404643;
+    }
+    
+    .btn-weather { 
+      background-color: transparent; 
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-weather:active {
+      background-color: var(--bg-main);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Raid Francia & Spagna 2026</h1>
+    <p>Roadbook d'Itinerario Aggiornato (12 Giorni)</p>
+  </header>
+
+  <div class="day-selector-container">
+    <div class="day-selector" id="daySelector"></div>
   </div>
 
-  <div class="button-group">
-    <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Viaduc+de+Garabit,+France/Aurillac,+France" target="_blank" class="btn btn-maps">Google Maps</a>
-    <a href="https://www.3bmeteo.com/meteo/aurillac/francia" target="_blank" class="btn btn-weather">Meteo Aurillac</a>
-  </div>
-</div>
+  <main class="content-container" id="stageContainer">
+    
+    <!-- Giorno 1 -->
+    <div class="stage-card active" data-day="1">
+      <span class="meta-badge">10 Agosto · Giorno 1</span>
+      <h2 class="route-title">Vicopisano ➔ Antibes</h2>
+      <div class="route-info"><span>🇮🇹 ➔ 🇫🇷 Costa Azzurra</span><span>• <strong>400 Km</strong></span></div>
+      <p class="description">Partenza ufficiale da Vicopisano. Tappa di trasferimento lungo la costa per raggiungere la Francia e fare base ad Antibes per la prima notte.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Varigotti & Capo Noli</strong>: scorci panoramici sulla vecchia via Aurelia.</li>
+          <li><strong>Mentone</strong>: le facciate pastello della prima cittadina francese dopo il confine.</li>
+          <li><strong>Antibes (Vieille Ville)</strong>: passeggiata serale tra i bastioni e il porto vecchio.</li>
+        </ul>
+      </div>
 
-<!-- Nuovo Giorno 4 -->
-<div class="stage-card" data-day="4">
-  <span class="meta-badge">13 Agosto · Giorno 4</span>
-  <h2 class="route-title">Aurillac ➔ Valle della Dordogna ➔ Bordeaux</h2>
-  <div class="route-info"><span>🇫🇷 Périgord Nero</span><span>• <strong>310 Km</strong></span></div>
-  <p class="description">Tappa densissima di spunti culturali e stradali: si segue il corso della Dordogna toccando Beaulieu, Creysse, Souillac, Sarlat, La Roque-Gageac e i siti preistorici di Les Eyzies, prima dell'allungo serale verso Bordeaux.</p>
-  
-  <div class="attractions-box">
-    <h3>Da non perdere</h3>
-    <ul class="attractions-list">
-      <li><strong>Beaulieu & Port de Creysse</strong>: antichi passaggi fluviali e borghi in pietra lungo la Dordogna.</li>
-      <li><strong>Sarlat-la-Canéda</strong>: il labirinto di vicoli medievali meglio conservato di Francia.</li>
-      <li><strong>La Roque-Gageac & Les Eyzies</strong>: le imponenti falesie calcaree a picco sul fiume e le culle della preistoria.</li>
-    </ul>
-  </div>
+      <div class="button-group">
+        <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="btn btn-weather">Meteo Antibes</a>
+      </div>
+    </div>
 
-  <div class="button-group">
-    <a href="https://www.google.com/maps/dir/Aurillac/Beaulieu-sur-Dordogne/Port+de+Creysse/Souillac/Sarlat-la-Can%C3%A9da/La+Roque-Gageac/Les+Eyzies/Bordeaux" target="_blank" class="btn btn-maps">Google Maps</a>
-    <a href="https://www.3bmeteo.com/meteo/bordeaux/francia" target="_blank" class="btn btn-weather">Meteo Bordeaux</a>
-  </div>
-</div>
+    <!-- Giorno 2 -->
+    <div class="stage-card" data-day="2">
+      <span class="meta-badge">11 Agosto · Giorno 2</span>
+      <h2 class="route-title">Antibes ➔ Verdon ➔ Malaucène</h2>
+      <div class="route-info"><span>🇫🇷 Alta Provenza</span><span>• <strong>313 Km</strong></span></div>
+      <p class="description">Giornata tra le curve di Comps-sur-Artuby e Aiguines nel cuore del Verdon, seguita dalla scalata del mitico Mont Ventoux con discesa su Malaucène.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Gorges du Verdon</strong>: balconi panoramici a picco sul canyon più grande d'Europa.</li>
+          <li><strong>Moustiers-Sainte-Marie</strong>: borgo medievale incastonato nella roccia calcarea.</li>
+          <li><strong>Mont Ventoux</strong>: il paesaggio lunare e desertico in cima allo storico Gigante della Provenza.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="btn btn-weather">Meteo Malaucène</a>
+      </div>
+    </div>
+
+    <!-- Giorno 3 -->
+    <div class="stage-card" data-day="3">
+      <span class="meta-badge">12 Agosto · Giorno 3</span>
+      <h2 class="route-title">Malaucène ➔ Gorges de l'Ardèche ➔ Aurillac</h2>
+      <div class="route-info"><span>🇫🇷 Ardèche & Cantal</span><span>• <strong>340 Km</strong></span></div>
+      <p class="description">Si lasciano le terre del Ventoux per attraversare i canyon dell'Ardèche, risalendo poi verso il Massiccio Centrale fino ad Aurillac.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Pont d'Arc</strong>: monumentale arco di roccia naturale sul fiume Ardèche.</li>
+          <li><strong>Viadotto di Garabit</strong>: lo spettacolare ponte ferroviario in ferro battuto di Gustave Eiffel.</li>
+          <li><strong>Aurillac</strong>: capoluogo del Cantal, racchiuso tra le montagne vulcaniche.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Viaduc+de+Garabit,+France/Aurillac,+France" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/aurillac/francia" target="_blank" class="btn btn-weather">Meteo Aurillac</a>
+      </div>
+    </div>
+
+    <!-- Giorno 4 -->
+    <div class="stage-card" data-day="4">
+      <span class="meta-badge">13 Agosto · Giorno 4</span>
+      <h2 class="route-title">Aurillac ➔ Valle della Dordogna ➔ Bordeaux</h2>
+      <div class="route-info"><span>🇫🇷 Périgord Nero</span><span>• <strong>310 Km</strong></span></div>
+      <p class="description">Tappa densissima nel cuore del Périgord Nero: si segue la Dordogna toccando Beaulieu, Creysse, Souillac, Sarlat, La Roque-Gageac e i siti preistorici di Les Eyzies, prima dell'allungo verso Bordeaux.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Beaulieu & Port de Creysse</strong>: antichi passaggi fluviali e borghi in pietra lungo la Dordogna.</li>
+          <li><strong>Sarlat-la-Canéda</strong>: il labirinto di vicoli medievali meglio conservato di Francia.</li>
+          <li><strong>La Roque-Gageac & Les Eyzies</strong>: le imponenti falesie calcaree a picco sul fiume e le culle della preistoria.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Aurillac/Beaulieu-sur-Dordogne/Port+de+Creysse/Souillac/Sarlat-la-Can%C3%A9da/La+Roque-Gageac/Les+Eyzies/Bordeaux" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/bordeaux/francia" target="_blank" class="btn btn-weather">Meteo Bordeaux</a>
+      </div>
+    </div>
+
+    <!-- Giorno 5 -->
+    <div class="stage-card" data-day="5">
+      <span class="meta-badge">14 Agosto · Giorno 5</span>
+      <h2 class="route-title">Bordeaux ➔ San Sebastián</h2>
+      <div class="route-info"><span>🇫🇷 ➔ 🇪🇸 Paesi Baschi</span><span>• <strong>240 Km</strong></span></div>
+      <p class="description">Si scende verso sud costeggiando il golfo di Guascogna e superando il confine spagnolo per entrare nei Paesi Baschi. Notte a San Sebastián.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Biarritz</strong>: l'elegante architettura della costa basca francese e lo scoglio della Vergine.</li>
+          <li><strong>Playa de la Concha</strong>: la celebre baia a semiluna di San Sebastián.</li>
+          <li><strong>Parte Vieja (San Sebastián)</strong>: imperdibile tour serale per i tipici Pintxos baschi.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Bordeaux,+France/San+Sebastián,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/san-sebasti%C3%A1n/spagna" target="_blank" class="btn btn-weather">Meteo San Sebastián</a>
+      </div>
+    </div>
+
+    <!-- Giorno 6 -->
+    <div class="stage-card" data-day="6">
+      <span class="meta-badge">15 Agosto · Giorno 6</span>
+      <h2 class="route-title">San Sebastián ➔ SJPDP ➔ Roncisvalle ➔ Pamplona</h2>
+      <div class="route-info"><span>Valico Pirenaico</span><span>• <strong>195 Km</strong></span></div>
+      <p class="description">Tappa spettacolare d'alta quota. Si va a Saint-Jean-Pied-de-Port per scalare i Pirenei via Col d'Arnosteguy, si scollina a Roncisvalle e si scende a Pamplona.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Saint-Jean-Pied-de-Port</strong>: antica cittadina fortificata e partenza ufficiale del Cammino di Santiago.</li>
+          <li><strong>Col d'Arnosteguy</strong>: asfalto stretto e panorami pirenaici selvaggi d'alta quota.</li>
+          <li><strong>Collegiata di Roncisvalle</strong>: il celebre santuario gotico legato alle leggende del ciclo carolingio.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/San+Sebastián,+Spain/Saint-Jean-Pied-de-Port,+France/Roncesvalles,+Spain/Pamplona,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="btn btn-weather">Meteo Pamplona</a>
+      </div>
+    </div>
+
+    <!-- Giorno 7 -->
+    <div class="stage-card" data-day="7">
+      <span class="meta-badge">16 Agosto · Giorno 7</span>
+      <h2 class="route-title">Pamplona ➔ Jaca ➔ Aínsa</h2>
+      <div class="route-info"><span>🇪🇸 Tappa Aragonese Accorpata</span><span>• <strong>285 Km</strong></span></div>
+      <p class="description">Unione delle due frazioni pre-pirenaiche. Taglio panoramico continuo costeggiando il canyon di Ordesa fino allo splendido insediamento medievale in pietra di Aínsa.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Foz de Arbayún</strong>: imponente gola profonda intagliata dal fiume Salazar.</li>
+          <li><strong>Cittadella di Jaca</strong>: fortificazione pentagonale del XVI secolo perfettamente intatta.</li>
+          <li><strong>Plaza Mayor di Aínsa</strong>: straordinaria e antica piazza monumentale interamente in pietra.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Pamplona/Jaca/A%C3%ADnsa" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/ainsa/spagna" target="_blank" class="btn btn-weather">Meteo Aínsa</a>
+      </div>
+    </div>
+
+    <!-- Giorno 8 -->
+    <div class="stage-card" data-day="8">
+      <span class="meta-badge">17 Agosto · Giorno 8</span>
+      <h2 class="route-title">Aínsa ➔ Vielha</h2>
+      <div class="route-info"><span>🇪🇸 Pirenei Catalani</span><span>• <strong>170 Km</strong></span></div>
+      <p class="description">Si entra nel vivo dei Pirenei catalani superando passi di montagna spettacolari fino a scendere nella conca alpina della Val d'Aran.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Collada de Fadas</strong>: passo montano guidato e panoramico a quota 1470m.</li>
+          <li><strong>Chiese Romaniche della Vall de Boí</strong>: patrimonio UNESCO dall'inconfondibile stile architettonico.</li>
+          <li><strong>Vielha centro</strong>: pittoresco capoluogo montano dall'atmosfera marcatamente alpina.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Aínsa,+Spain/Vielha,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/vielha/spagna" target="_blank" class="btn btn-weather">Meteo Vielha</a>
+      </div>
+    </div>
+
+    <!-- Giorno 9 -->
+    <div class="stage-card" data-day="9">
+      <span class="meta-badge">18 Agosto · Giorno 9</span>
+      <h2 class="route-title">Vielha ➔ Puigcerdà</h2>
+      <div class="route-info"><span>🇪🇸 Alta Cerdanya</span><span>• <strong>200 Km</strong></span></div>
+      <p class="description">Tappa di alta montagna memorabile. Curve e asfalto perfetto che costeggiano il confine francese fino a raggiungere l'altopiano di Puigcerdà.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Port de la Bonaigua</strong>: leggendario valico motociclistico pirenaico a 2.072 metri di quota.</li>
+          <li><strong>Sort</strong>: caratteristico borgo montano bagnato dal fiume Noguera Pallaresa.</li>
+          <li><strong>Puigcerdà</strong>: l'elegante laghetto urbano situato sul confine di stato.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Vielha,+Spain/Puigcerdà,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/puigcerda/spagna" target="_blank" class="btn btn-weather">Meteo Puigcerdà</a>
+      </div>
+    </div>
+
+    <!-- Giorno 10 -->
+    <div class="stage-card" data-day="10">
+      <span class="meta-badge">19 Agosto · Giorno 10</span>
+      <h2 class="route-title">Puigcerdà ➔ Ripoll ➔ Barcellona</h2>
+      <div class="route-info"><span>🇪🇸 Discesa sulla Costa</span><span>• <strong>180 Km</strong></span></div>
+      <p class="description">Si scende definitivamente dai Pirenei passando per Ripoll, affrontando le ultime splendide sezioni guidate prima di entrare a Barcellona.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Collada de Toses</strong>: una delle strade a curve più famose della penisola iberica per grip e traiettorie.</li>
+          <li><strong>Monastero di Ripoll</strong>: celebre per il suo monumentale e intagliato portale in pietra del XII secolo.</li>
+          <li><strong>Tibidabo (Barcellona)</strong>: punto panoramico elevato sulla città prima del check-in in hotel.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona,+Spain" target="_blank" class="btn btn-maps">Google Maps</a>
+        <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-weather">Meteo Barcellona</a>
+      </div>
+    </div>
+
+    <!-- Giorno 11 -->
+    <div class="stage-card" data-day="11">
+      <span class="meta-badge">20 Agosto · Giorno 11</span>
+      <h2 class="route-title">Barcellona (Sosta)</h2>
+      <div class="route-info"><span>🇪🇸 Giornata Relax</span><span>• <strong>0 Km</strong></span></div>
+      <p class="description">Giornata di totale sosta e riposo a Barcellona. Ottima occasione per girare a piedi, ricaricare le batterie e godersi la città.</p>
+      
+      <div class="attractions-box">
+        <h3>Da non perdere</h3>
+        <ul class="attractions-list">
+          <li><strong>Sagrada Família & Gotico</strong>: i capolavori intramontabili di Antoni Gaudí e i vicoli del centro storico.</li>
+          <li><strong>Barceloneta</strong>: passeggiata sul lungomare e sosta culinaria nei locali storici.</li>
+          <li><strong>Bunkers del Carmel</strong>: eccezionale punto di osservazione a 360 gradi consigliato per il tramonto.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Barcelona,+Spain" target="_blank" class="btn btn-maps">Mappa di Barcellona</a>
+        <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-weather">Meteo Barcellona</a>
+      </div>
+    </div>
+
+    <!-- Giorno 12 -->
+    <div class="stage-card" data-day="12">
+      <span class="meta-badge">21 Agosto · Giorno 12</span>
+      <h2 class="route-title">Barcellona ➔ Traghetto ➔ Civitavecchia</h2>
+      <div class="route-info"><span>🚢 Grimaldi Lines</span><span>• <strong>Rientro</strong></span></div>
+      <p class="description">Imbarco al mattino sul traghetto Grimaldi Lines (Cabina esclusiva). Navigazione e riposo sul Mar Mediterraneo con arrivo previsto a Civitavecchia intorno alla mezzanotte.</p>
+      
+      <div class="attractions-box">
+        <h3>A bordo</h3>
+        <ul class="attractions-list">
+          <li><strong>Ponti Esterni</strong>: relax in navigazione al tramonto sul Mar Mediterraneo.</li>
+          <li><strong>Debriefing</strong>: momento ideale per archiviare le foto e rivedere i tracciati del viaggio.</li>
+        </ul>
+      </div>
+
+      <div class="button-group">
+        <a href="https://www.google.com/maps/dir/Port+of+Barcelona,+Barcelona,+Spain/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italy" target="_blank" class="btn btn-maps">Rotta Marittima</a>
+        <a href="https://www.3bmeteo.com/meteo/civitavecchia" target="_blank" class="btn btn-weather">Meteo Civitavecchia</a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const totalDays = 12; 
+    const selector = document.getElementById('daySelector');
+
+    for (let i = 1; i <= totalDays; i++) {
+      const btn = document.createElement('button');
+      btn.className = `day-btn ${i === 1 ? 'active' : ''}`;
+      btn.innerText = `Giorno ${i}`;
+      btn.onclick = () => switchDay(i, btn);
+      selector.appendChild(btn);
+    }
+
+    function switchDay(dayNumber, clickedButton) {
+      document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
+
+      clickedButton.classList.add('active');
+      const targetCard = document.querySelector(`.stage-card[data-day="${dayNumber}"]`);
+      if (targetCard) targetCard.classList.add('active');
+
+      clickedButton.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  </script>
+</body>
+</html>
