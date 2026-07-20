@@ -290,7 +290,7 @@
       color: var(--accent);
     }
 
-    /* Mappa Interattiva con Pin Città basata su Immagine1.png */
+    /* Mappa Interattiva Ottimizzata e Compatta */
     .map-wrapper {
       position: relative;
       width: 100%;
@@ -310,20 +310,18 @@
     .map-pin-link {
       position: absolute;
       transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border: 1px solid var(--border);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.6rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #dcd6d0;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-size: 0.5rem;
       font-weight: 600;
       color: var(--text-main);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      gap: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
       transition: all 0.2s ease;
       white-space: nowrap;
       z-index: 3;
@@ -333,16 +331,16 @@
       background-color: var(--accent);
       color: #fff;
       border-color: var(--accent);
-      transform: translate(-50%, -50%) scale(1.08);
+      transform: translate(-50%, -50%) scale(1.15);
       z-index: 5;
     }
 
     .map-pin-link .pin-badge {
       background: var(--accent-light);
       color: var(--accent);
-      border-radius: 3px;
-      padding: 1px 3px;
-      font-size: 0.55rem;
+      border-radius: 2px;
+      padding: 0px 2px;
+      font-size: 0.45rem;
     }
 
     .map-pin-link:hover .pin-badge {
@@ -350,18 +348,18 @@
       color: #fff;
     }
 
-    /* Coordinate percentuali adattate esattamente su Immagine1.png */
-    .pin-civitavecchia { top: 60%; left: 59%; }
+    /* Coordinate percentuali ricalcolate per evitare sovrapposizioni */
+    .pin-civitavecchia { top: 61%; left: 60%; }
     .pin-vicopisano    { top: 54%; left: 56%; }
-    .pin-antibes       { top: 52%; left: 47%; }
-    .pin-malaucene     { top: 48%; left: 40%; }
-    .pin-aurillac      { top: 42%; left: 36%; }
-    .pin-bordeaux      { top: 46%; left: 28%; }
-    .pin-sansebastian  { top: 50%; left: 21%; }
-    .pin-pamplona      { top: 54%; left: 20%; }
-    .pin-ainsa         { top: 55%; left: 26%; }
-    .pin-puigcerda     { top: 59%; left: 32%; }
-    .pin-barcellona    { top: 66%; left: 32%; }
+    .pin-antibes       { top: 51%; left: 47%; }
+    .pin-malaucene     { top: 47%; left: 39%; }
+    .pin-aurillac      { top: 40%; left: 35%; }
+    .pin-bordeaux      { top: 45%; left: 27%; }
+    .pin-sansebastian  { top: 49%; left: 20%; }
+    .pin-pamplona      { top: 54%; left: 19%; }
+    .pin-ainsa         { top: 56%; left: 26%; }
+    .pin-puigcerda     { top: 60%; left: 32%; }
+    .pin-barcellona    { top: 68%; left: 33%; }
 
     .metrics-summary-grid {
       display: grid;
@@ -429,7 +427,7 @@
       <div class="map-wrapper">
         <img src="Immagine1.png" alt="Mappa Raid Immagine1" class="map-img">
         
-        <!-- Link interattivi posizionati sulle città in base a Immagine1.png -->
+        <!-- Link interattivi compatti e distanziati -->
         <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-civitavecchia">Civitavecchia <span class="pin-badge">G1</span></a>
         <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-vicopisano">Vicopisano <span class="pin-badge">G1</span></a>
         <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-antibes">Antibes <span class="pin-badge">G1</span></a>
@@ -713,14 +711,12 @@
     function initNavigation() {
       const selector = document.getElementById('daySelector');
       
-      // Crea tasto Home
       const homeBtn = document.createElement('button');
       homeBtn.className = 'day-btn active';
       homeBtn.innerText = 'Info';
       homeBtn.onclick = () => switchTab(0, homeBtn);
       selector.appendChild(homeBtn);
 
-      // Crea tasti giorni
       for (let i = 1; i <= totalDays; i++) {
         const btn = document.createElement('button');
         btn.className = 'day-btn';
@@ -731,7 +727,6 @@
     }
 
     function switchTab(dayNum, clickedButton) {
-      // Aggiorna stato bottoni superiori
       document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
       if (clickedButton) {
         clickedButton.classList.add('active');
@@ -742,7 +737,6 @@
         buttons[dayNum].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
 
-      // Aggiorna visibilità schede
       document.querySelectorAll('.stage-card').forEach(card => {
         if (parseInt(card.getAttribute('data-day')) === dayNum) {
           card.classList.add('active');
