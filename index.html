@@ -191,43 +191,53 @@
       color: var(--text-muted);
     }
 
+    /* Pulsanti d'Azione Minimali e Curati */
     .action-buttons-3d {
       display: flex;
       gap: 8px;
     }
 
-    .btn-3d {
+    .btn-action {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 46px;
+      width: 40px;
       height: 40px;
-      font-size: 1.1rem;
       text-decoration: none;
-      border-radius: 6px;
-      position: relative;
-      transition: all 0.1s ease;
+      border-radius: 8px;
+      transition: all 0.2s ease;
       user-select: none;
+      border: 1px solid var(--border);
+      background-color: var(--card-bg);
     }
 
-    .btn-3d-maps {
-      background: #2c302e;
-      border: 1px solid #1a1d1c;
-      box-shadow: 0 4px 0 #121413, 0 4px 6px rgba(0,0,0,0.2);
-    }
-    .btn-3d-maps:active {
-      transform: translateY(4px);
-      box-shadow: 0 0px 0 #121413, 0 1px 2px rgba(0,0,0,0.2);
+    .btn-action span {
+      font-size: 1.05rem;
+      transition: transform 0.2s ease;
     }
 
-    .btn-3d-weather {
-      background: #b86b4c;
-      border: 1px solid #9e5637;
-      box-shadow: 0 4px 0 #804328, 0 4px 6px rgba(0,0,0,0.2);
+    .btn-action:hover span {
+      transform: scale(1.1);
     }
-    .btn-3d-weather:active {
-      transform: translateY(4px);
-      box-shadow: 0 0px 0 #804328, 0 1px 2px rgba(0,0,0,0.2);
+
+    /* Stile specifico Mappe */
+    .btn-maps {
+      color: var(--text-main);
+    }
+    .btn-maps:hover {
+      background-color: var(--text-main);
+      color: var(--card-bg);
+      border-color: var(--text-main);
+    }
+
+    /* Stile specifico Meteo */
+    .btn-weather {
+      color: var(--accent);
+    }
+    .btn-weather:hover {
+      background-color: var(--accent);
+      color: var(--card-bg);
+      border-color: var(--accent);
     }
 
     .description {
@@ -308,8 +318,8 @@
             <span class="total-km-badge">Progressivo: 400 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Antibes">☀️</a>
+            <a href="https://maps.app.goo.gl/QLxsmqE3G6s5RTg9A" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/antibes/francia" target="_blank" class="btn-action btn-weather" title="Meteo Antibes"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -337,8 +347,8 @@
             <span class="total-km-badge">Progressivo: 713 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Malaucène">☀️</a>
+            <a href="https://www.google.com/maps/dir/Antibes,+France/Comps-sur-Artuby,+France/Aiguines,+France/Mont+Ventoux,+France/Malaucène,+France" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/malauc%C3%A8ne/francia" target="_blank" class="btn-action btn-weather" title="Meteo Malaucène"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -366,8 +376,8 @@
             <span class="total-km-badge">Progressivo: 1.053 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Viaduc+de+Garabit,+France/Aurillac,+France" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/aurillac/francia" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Aurillac">☀️</a>
+            <a href="https://www.google.com/maps/dir/Malaucène,+France/Gorges+de+l'Ardèche,+France/Viaduc+de+Garabit,+France/Aurillac,+France" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/aurillac/francia" target="_blank" class="btn-action btn-weather" title="Meteo Aurillac"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -395,8 +405,8 @@
             <span class="total-km-badge">Progressivo: 1.363 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Aurillac/Beaulieu-sur-Dordogne/Port+de+Creysse/Souillac/Sarlat-la-Can%C3%A9da/La+Roque-Gageac/Les+Eyzies/Bordeaux" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/bordeaux/francia" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Bordeaux">☀️</a>
+            <a href="https://www.google.com/maps/dir/Aurillac/Beaulieu-sur-Dordogne/Port+de+Creysse/Souillac/Sarlat-la-Can%C3%A9da/La+Roque-Gageac/Les+Eyzies/Bordeaux" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/bordeaux/francia" target="_blank" class="btn-action btn-weather" title="Meteo Bordeaux"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -424,8 +434,8 @@
             <span class="total-km-badge">Progressivo: 1.603 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Bordeaux,+France/San+Sebastián,+Spain" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/san-sebasti%C3%A1n/spagna" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo San Sebastián">☀️</a>
+            <a href="https://www.google.com/maps/dir/Bordeaux,+France/San+Sebastián,+Spain" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/san-sebasti%C3%A1n/spagna" target="_blank" class="btn-action btn-weather" title="Meteo San Sebastián"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -444,28 +454,28 @@
     <!-- Giorno 6 -->
     <div class="stage-card" data-day="6">
       <span class="meta-badge">15 Agosto · Giorno 6</span>
-      <h2 class="route-title">San Sebastián ➔ Lizarrusti ➔ Urbasa ➔ Pamplona</h2>
+      <h2 class="route-title">San Sebastián ➔ Urbasa ➔ Estella ➔ Pamplona</h2>
       <div class="route-info">
-        <div><span>🇪🇸 Interno della Navarra (No Autostrada)</span></div>
+        <div><span>🇪🇸 Interno della Navarra (Passaggio da Estella)</span></div>
         <div class="route-metrics-row">
           <div class="metrics-left">
-            <span class="metric-item">🏍️ <strong>185 Km</strong> · 🕒 <strong>~3h 50m</strong></span>
-            <span class="total-km-badge">Progressivo: 1.788 Km</span>
+            <span class="metric-item">🏍️ <strong>235 Km</strong> · 🕒 <strong>~4h 30m</strong></span>
+            <span class="total-km-badge">Progressivo: 1.838 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/San+Sebastián,+Spagna/Tolosa,+Spagna/Puerto+de+Lizarrusti,+Spagna/Olazagutía,+Spagna/Puerto+de+Urbasa,+Spagna/Pamplona,+Spagna" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Pamplona">☀️</a>
+            <a href="https://www.google.com/maps/dir/San+Sebastián,+Spagna/Tolosa,+Spagna/Puerto+de+Lizarrusti,+Spagna/Olazagutía,+Spagna/Puerto+de+Urbasa,+Spagna/Estella,+Spagna/Pamplona,+Spagna" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/pamplona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Pamplona"><span>☀️</span></a>
           </div>
         </div>
       </div>
-      <p class="description">Tracciato interamente stradale e montano che taglia l'interno basco e navarrese evitando la costa. Si sale al Passo di Lizarrusti sulla GI-2120 per poi scalare lo spettacolare altopiano calcareo di Urbasa prima di scendere a Pamplona.</p>
+      <p class="description">Tracciato montano che taglia l'interno basco e navarrese evitando la costa. Si sale al Passo di Lizarrusti sulla GI-2120 e si scala lo spettacolare altopiano di Urbasa. Successivamente si scende verso sud per toccare la storica città di Estella prima di risalire verso Pamplona.</p>
       
       <div class="attractions-box">
         <h3>Geografia e Sapori della Tappa</h3>
         <ul class="attractions-list">
-          <li><strong>Passo di Lizarrusti (GI-2120)</strong>: Valico montano immerso nel Parco Naturale di Aralar, caratterizzato da un asfalto perfetto e curve ritmiche racchiuse in fitti boschi di faggi. Zona di produzione del formaggio ovino DOP *Idiazabal*, dal sapore intenso e lievemente affumicato.</li>
-          <li><strong>Parco Naturale di Urbasa-Andía (NA-718)</strong>: Un immenso altopiano verdeggiante dove la strada si inerpica superando pareti di roccia calcarea verticale con ampi belvedere. Qui pascolano liberi i cavalli e le pecore latxa.</li>
-          <li><strong>Pamplona &amp; Plaza del Castillo</strong>: Arrivo nella capitale navarrese senza aver toccato un metro di autostrada. La serata invita all'assaggio dei *Pimientos del Piquillo* grigliati e ripieni, seguiti da un bicchiere di *Pacharán* (liquore locale alle prugnole).</li>
+          <li><strong>Passo di Lizarrusti &amp; Urbasa (NA-718)</strong>: Valichi immersi nella natura tra boschi di faggi e pareti di roccia calcarea verticale. Zona di produzione del formaggio ovino DOP *Idiazabal*, dal sapore intenso e lievemente affumicato.</li>
+          <li><strong>Estella-Lizarra</strong>: Cittadina monumentale e punto chiave del Cammino di Santiago, ricca di architettura romanica e gotica. Nota gastronomica per il *Gorrín asado* (maialino da latte al forno) e i vini della vicina sottozona della DOC Rioja.</li>
+          <li><strong>Pamplona &amp; Plaza del Castillo</strong>: Arrivo nella capitale navarrese dopo la deviazione a sud. La serata invita all'assaggio dei *Pimientos del Piquillo* grigliati e ripieni, seguiti da un bicchiere di *Pacharán* (liquore locale alle prugnole).</li>
         </ul>
       </div>
     </div>
@@ -482,8 +492,8 @@
             <span class="total-km-badge">Progressivo: 2.073 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Pamplona,+Spagna/Mirador+de+la+Foz+de+Arbay%C3%BAn,+NA-178,+Spagna/Jaca,+Spagna/Puerto+de+Cotefablo,+22622,+Huesca,+Spagna/A%C3%ADnsa,+Spagna" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/ainsa/spagna" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Aínsa">☀️</a>
+            <a href="https://www.google.com/maps/dir/Pamplona,+Spagna/Mirador+de+la+Foz+de+Arbay%C3%BAn,+NA-178,+Spagna/Jaca,+Spagna/Puerto+de+Cotefablo,+22622,+Huesca,+Spagna/A%C3%ADnsa,+Spagna" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/ainsa/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Aínsa"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -511,8 +521,8 @@
             <span class="total-km-badge">Progressivo: 2.318 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/A%C3%ADnsa,+Spagna/Castej%C3%B3n+de+Sos,+Spagna/Collada+de+Fadas,+Spagna/Vielha,+Spagna/Port+de+la+Bonaigua,+Spagna/Sort,+Spagna/Puigcerd%C3%A0,+Spagna" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/puigcerda/spagna" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Puigcerdà">☀️</a>
+            <a href="https://www.google.com/maps/dir/A%C3%ADnsa,+Spagna/Castej%C3%B3n+de+Sos,+Spagna/Collada+de+Fadas,+Spagna/Vielha,+Spagna/Port+de+la+Bonaigua,+Spagna/Sort,+Spagna/Puigcerd%C3%A0,+Spagna" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/puigcerda/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Puigcerdà"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -541,8 +551,8 @@
             <span class="total-km-badge">Progressivo: 2.498 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona,+Spain" target="_blank" class="btn btn-3d btn-3d-maps" title="Mappa Google Maps">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Barcellona">☀️</a>
+            <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona,+Spain" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Barcellona"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -570,8 +580,8 @@
             <span class="total-km-badge">Progressivo: 2.498 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Barcelona,+Spain" target="_blank" class="btn btn-3d btn-3d-maps" title="Piantina Città">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Barcellona">☀️</a>
+            <a href="https://www.google.com/maps/dir/Barcelona,+Spain" target="_blank" class="btn-action btn-maps" title="Piantina Città"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Barcellona"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -599,8 +609,8 @@
             <span class="total-km-badge">Progressivo: Navigazione</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Port+of+Barcelona,+Barcelona,+Spain/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italy" target="_blank" class="btn btn-3d btn-3d-maps" title="Rotta Marittima">🗺️</a>
-            <a href="https://www.3bmeteo.com/meteo/civitavecchia" target="_blank" class="btn btn-3d btn-3d-weather" title="Meteo Civitavecchia">☀️</a>
+            <a href="https://www.google.com/maps/dir/Port+of+Barcelona,+Barcelona,+Spain/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italy" target="_blank" class="btn-action btn-maps" title="Rotta Marittima"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/civitavecchia" target="_blank" class="btn-action btn-weather" title="Meteo Civitavecchia"><span>☀️</span></a>
           </div>
         </div>
       </div>
@@ -621,7 +631,6 @@
     const totalDays = 11; 
     const selector = document.getElementById('daySelector');
 
-    // Genera i bottoni dei giorni
     for (let i = 1; i <= totalDays; i++) {
       const btn = document.createElement('button');
       btn.className = `day-btn ${i === 1 ? 'active' : ''}`;
@@ -630,13 +639,10 @@
       selector.appendChild(btn);
     }
 
-    // Gestisce il cambio di scheda
     function switchDay(dayNumber, clickedButton) {
-      // Rimuove la classe attiva da tutti i bottoni e la assegna al cliccato
       document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
       clickedButton.classList.add('active');
 
-      // Nasconde tutte le schede e mostra quella selezionata
       document.querySelectorAll('.stage-card').forEach(card => {
         card.classList.remove('active');
         if (parseInt(card.getAttribute('data-day')) === dayNumber) {
@@ -644,7 +650,6 @@
         }
       });
 
-      // Centra lo scorrimento del bottone nel menu orizzontale su mobile
       clickedButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   </script>
