@@ -191,7 +191,6 @@
       color: var(--text-muted);
     }
 
-    /* Pulsanti d'Azione Minimali e Curati */
     .action-buttons-3d {
       display: flex;
       gap: 8px;
@@ -220,7 +219,6 @@
       transform: scale(1.1);
     }
 
-    /* Stile specifico Mappe */
     .btn-maps {
       color: var(--text-main);
     }
@@ -230,7 +228,6 @@
       border-color: var(--text-main);
     }
 
-    /* Stile specifico Meteo */
     .btn-weather {
       color: var(--accent);
     }
@@ -253,6 +250,7 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 16px;
+      margin-bottom: 16px;
     }
 
     .attractions-box h3 {
@@ -291,13 +289,117 @@
       left: 2px;
       color: var(--accent);
     }
+
+    /* Mappa Interattiva con Pin Città basata su Immagine1.png */
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      background-color: var(--box-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .map-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .map-pin-link {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .map-pin-link:hover {
+      background-color: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translate(-50%, -50%) scale(1.08);
+      z-index: 5;
+    }
+
+    .map-pin-link .pin-badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 3px;
+      padding: 1px 3px;
+      font-size: 0.55rem;
+    }
+
+    .map-pin-link:hover .pin-badge {
+      background: rgba(255,255,255,0.3);
+      color: #fff;
+    }
+
+    /* Coordinate percentuali adattate esattamente su Immagine1.png */
+    .pin-civitavecchia { top: 60%; left: 59%; }
+    .pin-vicopisano    { top: 54%; left: 56%; }
+    .pin-antibes       { top: 52%; left: 47%; }
+    .pin-malaucene     { top: 48%; left: 40%; }
+    .pin-aurillac      { top: 42%; left: 36%; }
+    .pin-bordeaux      { top: 46%; left: 28%; }
+    .pin-sansebastian  { top: 50%; left: 21%; }
+    .pin-pamplona      { top: 54%; left: 20%; }
+    .pin-ainsa         { top: 55%; left: 26%; }
+    .pin-puigcerda     { top: 59%; left: 32%; }
+    .pin-barcellona    { top: 66%; left: 32%; }
+
+    .metrics-summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
+      margin-bottom: 16px;
+    }
+
+    .metric-summary-box {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .metric-summary-val {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .metric-summary-lbl {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
 
   <header>
     <h1>Raid Francia &amp; Spagna 2026</h1>
-    <p>Roadbook d'Itinerario Aggiornato (11 Giorni)</p>
+    <p>Roadbook d'Itinerario Aggiornato</p>
   </header>
 
   <div class="day-selector-container">
@@ -306,8 +408,44 @@
 
   <main class="content-container" id="stageContainer">
     
+    <!-- Tab Summary -->
+    <div class="stage-card active" data-day="0">
+      <span class="meta-badge">Panoramica del Viaggio</span>
+      <h2 class="route-title">Riepilogo e Itinerario</h2>
+      
+      <div class="metrics-summary-grid">
+        <div class="metric-summary-box">
+          <span class="metric-summary-lbl">Giorni Totali</span>
+          <span class="metric-summary-val">9 Giorni</span>
+        </div>
+        <div class="metric-summary-box">
+          <span class="metric-summary-lbl">Km Totali Tracciato</span>
+          <span class="metric-summary-val">2.498 Km</span>
+        </div>
+      </div>
+      
+      <p class="description">Usa i link interattivi posizionati vicino alle città sulla mappa sottostante per saltare direttamente al giorno corrispondente.</p>
+      
+      <div class="map-wrapper">
+        <img src="Immagine1.png" alt="Mappa Raid Immagine1" class="map-img">
+        
+        <!-- Link interattivi posizionati sulle città in base a Immagine1.png -->
+        <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-civitavecchia">Civitavecchia <span class="pin-badge">G1</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-vicopisano">Vicopisano <span class="pin-badge">G1</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-antibes">Antibes <span class="pin-badge">G1</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(2)" class="map-pin-link pin-malaucene">Malaucène <span class="pin-badge">G2</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(3)" class="map-pin-link pin-aurillac">Aurillac <span class="pin-badge">G3</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(4)" class="map-pin-link pin-bordeaux">Bordeaux <span class="pin-badge">G4</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(5)" class="map-pin-link pin-sansebastian">San Sebastián <span class="pin-badge">G5</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(6)" class="map-pin-link pin-pamplona">Pamplona <span class="pin-badge">G6</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(7)" class="map-pin-link pin-ainsa">Aínsa <span class="pin-badge">G7</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(8)" class="map-pin-link pin-puigcerda">Puigcerdà <span class="pin-badge">G8</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(9)" class="map-pin-link pin-barcellona">Barcellona <span class="pin-badge">G9</span></a>
+      </div>
+    </div>
+    
     <!-- Giorno 1 -->
-    <div class="stage-card active" data-day="1">
+    <div class="stage-card" data-day="1">
       <span class="meta-badge">10 Agosto · Giorno 1</span>
       <h2 class="route-title">Vicopisano ➔ Antibes</h2>
       <div class="route-info">
@@ -534,7 +672,7 @@
           <li><strong>Collada de Fadas (1470m) &amp; Espina</strong>: Passi appenninici aragonesi con curve ritmiche dal raggio perfetto. La zona è famosa per la produzione del <em>Queso de Benasque</em> (formaggio vaccino stagionato a pasta dura) e per la *Longaniza de Graus* (insaccato speziato locale).</li>
           <li><strong>Val d'Aran &amp; Vielha</strong>: Vallata ad assetto autonomo con architettura in pietra scura e tetti in ardesia. La specialty gastronomica assoluta è la <em>Òlha Aranesa</em>, una ricchissima zuppa di montagna a base di carni miste (gallina, maiale, manzo), verdure, legumi e pasta, perfetta per i climi alpini.</li>
           <li><strong>Port de la Bonaigua (2072m)</strong>: Uno dei passi più alti e spettacolari dei Pirenei, linea di demarcazione climatica tra il versante atlantico e quello mediterraneo. Offre una discesa tecnica costellata di tornanti stretti.</li>
-          <li><strong>Sort &amp; Altopiano della Cerdanya</strong>: Discesa lungo il fiume Noguera Pallaresa (patria del rafting) fino all'ampia vallata soleggiata di Puigcerdà. Qui si produce il <em>Tupí</em> (formaggio fermentato in orci di terracotta con acquavite) ed è d'obbligo assaggero il *Trinxat de la Cerdanya*, piatto tipico a base di verza invernale, patate e pancetta croccante (*cansalada*).</li>
+          <li><strong>Sort &amp; Altopiano della Cerdanya</strong>: Discesa lungo il fiume Noguera Pallaresa (patria del rafting) fino all'ampia vallata soleggiata di Puigcerdà. Qui si produce il <em>Tupí</em> (formaggio fermentato in orci di terracotta con acquavite) ed è d'obbligo assaggiare il *Trinxat de la Cerdanya*, piatto tipico a base di verza invernale, patate e pancetta croccante (*cansalada*).</li>
         </ul>
       </div>
     </div>
@@ -551,76 +689,18 @@
             <span class="total-km-badge">Progressivo: 2.498 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona,+Spain" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
             <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Barcellona"><span>☀️</span></a>
           </div>
         </div>
       </div>
-      <p class="description">Si scende definitivamente dai Pirenei passando per Ripoll, affrontando le ultime splendide sezioni guidate prima di entrare a Barcellona.</p>
+      <p class="description">Fase di discesa dai Pirenei orientali passando per il polo storico di Ripoll, prima del rientro sulla costa e l'ingresso a Barcellona.</p>
       
       <div class="attractions-box">
         <h3>Geografia e Sapori della Tappa</h3>
         <ul class="attractions-list">
-          <li><strong>Collada de Toses (GI-400 / N-260)</strong>: Oltre 20 km di curve ininterrotte su un asfalto dal grip eccezionale, considerate un luogo di culto dai motociclistici catalani. La strada corre lungo il crinale montano regalando panorami immensi.</li>
-          <li><strong>Ripoll &amp; Pre-Pirenei</strong>: Sosta al Monastero di Santa Maria, culla storica della Catalogna medievale con un maestoso portale romanico. Questa regione montana è rinomata per i funghi selvatici (*bolets*) e per la *Botifarra*, la classica salsiccia di maiale locale cotta alla brace.</li>
-          <li><strong>Discesa verso Barcellona</strong>: Si abbandona l'aria fresca pirenaica scendendo verso la costa mediterranea. L'ingresso in città avviene passando dalle pendici del Tibidabo per una prima vista panoramica dall'alto della metropoli catalana.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Giorno 10 -->
-    <div class="stage-card" data-day="10">
-      <span class="meta-badge">19 Agosto · Giorno 10</span>
-      <h2 class="route-title">Barcellona (Sosta)</h2>
-      <div class="route-info">
-        <div><span>🇪🇸 Giornata Relax</span></div>
-        <div class="route-metrics-row">
-          <div class="metrics-left">
-            <span class="metric-item">🏍️ <strong>0 Km</strong> · 🕒 <strong>Sosta Totale</strong></span>
-            <span class="total-km-badge">Progressivo: 2.498 Km</span>
-          </div>
-          <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Barcelona,+Spain" target="_blank" class="btn-action btn-maps" title="Piantina Città"><span>🗺️</span></a>
-            <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Barcellona"><span>☀️</span></a>
-          </div>
-        </div>
-      </div>
-      <p class="description">Giornata di totale sosta e riposo a Barcellona. Ottima occasione per girare a piedi, ricaricare le batterie e godersi la città.</p>
-      
-      <div class="attractions-box">
-        <h3>Geografia e Sapori della Tappa</h3>
-        <ul class="attractions-list">
-          <li><strong>Quartiere Gotico &amp; Eixample</strong>: Il contrasto perfetto tra il fitto labirinto medievale del centro e l'ordine geometrico dei viali ottocenteschi dove svettano i capolavori modernisti di Gaudí (Sagrada Família e Casa Batlló).</li>
-          <li><strong>Bunkers del Carmel &amp; Barceloneta</strong>: I resti delle postazioni antiaeree della guerra civile sul colle del Carmel offrono la migliore vista a 360 gradi sulla costa e la griglia cittadina. Al mare, passeggiata nel vecchio quartiere dei pescatori della Barceloneta.</li>
-          <li><strong>Cucina Catalana di Mare</strong>: Occasione ideale per assaggiare la vera *Paella Parellada* (con frutti di mare e carne interamente sgusciati e puliti), l'immancabile *Pa amb tomàquet* (pane rustico strofinato con pomodoro, olio e sale) e la tipica *Crema Catalana* come dessert.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Giorno 11 -->
-    <div class="stage-card" data-day="11">
-      <span class="meta-badge">20 Agosto · Giorno 11</span>
-      <h2 class="route-title">Barcellona ➔ Traghetto ➔ Civitavecchia</h2>
-      <div class="route-info">
-        <div><span>🚢 Grimaldi Lines</span></div>
-        <div class="route-metrics-row">
-          <div class="metrics-left">
-            <span class="metric-item">🚢 <strong>Imbarco</strong> · 🕒 <strong>~20h Navigazione</strong></span>
-            <span class="total-km-badge">Progressivo: Navigazione</span>
-          </div>
-          <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Port+of+Barcelona,+Barcelona,+Spain/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italy" target="_blank" class="btn-action btn-maps" title="Rotta Marittima"><span>🗺️</span></a>
-            <a href="https://www.3bmeteo.com/meteo/civitavecchia" target="_blank" class="btn-action btn-weather" title="Meteo Civitavecchia"><span>☀️</span></a>
-          </div>
-        </div>
-      </div>
-      <p class="description">Imbarco al mattino sul traghetto Grimaldi Lines (Cabina esclusiva). Navigazione e riposo sul Mar Mediterraneo con arrivo previsto a Civitavecchia intorno alla mezzanotte.</p>
-      
-      <div class="attractions-box">
-        <h3>A bordo</h3>
-        <ul class="attractions-list">
-          <li><strong>Navigazione nel Mediterraneo</strong>: Tappa di riposo totale per far riposare il fisico dopo i chilometri e le pendenze accumulate sui Pirenei e nel Massiccio Centrale. I ponti esterni offrono ottimi scorci al tramonto durante il passaggio al largo della Sardegna.</li>
-          <li><strong>Logistica di Rientro</strong>: Tempo a disposizione in cabina per fare il punto sul materiale fotografico, scaricare le tracce GPS reali del viaggio e preparare i bagagli e la moto per lo sbarco a Civitavecchia e il successivo rientro a casa.</li>
+          <li><strong>Ripoll &amp; Pirenei Catalani</strong>: Culla culturale della Catalogna medievale grazie al monumentale Monastero di Santa Maria. Terra montana ricca di funghi e insaccati artigianali tradizionali come la *Fuet* e la *Butifarra*.</li>
+          <li><strong>Barcellona &amp; Cucina Marina</strong>: Grande metropoli mediterranea dominata dal modernismo architettonico. Ideale per festeggiare la chiusura della tratta continentale con una autentica *Arròs Negre* (riso al nero di seppia) o *Tapas* assortite nei mercati storici.</li>
         </ul>
       </div>
     </div>
@@ -628,31 +708,57 @@
   </main>
 
   <script>
-    const totalDays = 11; 
-    const selector = document.getElementById('daySelector');
+    const totalDays = 9;
 
-    for (let i = 1; i <= totalDays; i++) {
-      const btn = document.createElement('button');
-      btn.className = `day-btn ${i === 1 ? 'active' : ''}`;
-      btn.innerText = `Giorno ${i}`;
-      btn.onclick = () => switchDay(i, btn);
-      selector.appendChild(btn);
+    function initNavigation() {
+      const selector = document.getElementById('daySelector');
+      
+      // Crea tasto Home
+      const homeBtn = document.createElement('button');
+      homeBtn.className = 'day-btn active';
+      homeBtn.innerText = 'Info';
+      homeBtn.onclick = () => switchTab(0, homeBtn);
+      selector.appendChild(homeBtn);
+
+      // Crea tasti giorni
+      for (let i = 1; i <= totalDays; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'day-btn';
+        btn.innerText = `G${i}`;
+        btn.onclick = () => switchTab(i, btn);
+        selector.appendChild(btn);
+      }
     }
 
-    function switchDay(dayNumber, clickedButton) {
+    function switchTab(dayNum, clickedButton) {
+      // Aggiorna stato bottoni superiori
       document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-      clickedButton.classList.add('active');
+      if (clickedButton) {
+        clickedButton.classList.add('active');
+        clickedButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        const buttons = document.querySelectorAll('.day-btn');
+        buttons[dayNum].classList.add('active');
+        buttons[dayNum].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
 
+      // Aggiorna visibilità schede
       document.querySelectorAll('.stage-card').forEach(card => {
-        card.classList.remove('active');
-        if (parseInt(card.getAttribute('data-day')) === dayNumber) {
+        if (parseInt(card.getAttribute('data-day')) === dayNum) {
           card.classList.add('active');
+        } else {
+          card.classList.remove('active');
         }
       });
-
-      clickedButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  </script>
 
+    function navigateToDay(dayNum) {
+      switchTab(dayNum, null);
+    }
+
+    window.addEventListener('DOMContentLoaded', initNavigation);
+  </script>
 </body>
 </html>
