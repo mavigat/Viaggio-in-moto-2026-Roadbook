@@ -35,6 +35,7 @@
       padding-bottom: 40px;
       -webkit-font-smoothing: antialiased;
       line-height: 1.25;
+      overflow-x: hidden;
     }
 
     header {
@@ -113,6 +114,7 @@
       padding: 24px 16px;
       max-width: 480px;
       margin: 0 auto;
+      touch-action: pan-y;
     }
 
     .stage-card {
@@ -421,7 +423,7 @@
         </div>
       </div>
       
-      <p class="description">Usa i link interattivi posizionati sulla mappa sottostante per saltare direttamente al giorno corrispondente.</p>
+      <p class="description">Usa i link interattivi posizionati sulla mappa sottostante per saltare direttamente al giorno corrispondente, oppure scorri lo schermo in orizzontale (swipe) sulle schede per navigare tra le tappe.</p>
       
       <div class="map-wrapper">
         <img src="Immagine1.png" alt="Mappa Raid Immagine1" class="map-img">
@@ -774,6 +776,7 @@
 
   <script>
     const totalDays = 10;
+    let currentDay = 0;
 
     function initNavigation() {
       const selector = document.getElementById('daySelector');
@@ -791,17 +794,22 @@
         btn.onclick = () => switchTab(i, btn);
         selector.appendChild(btn);
       }
+
+      initSwipeGestures();
     }
 
     function switchTab(dayNum, clickedButton) {
+      currentDay = dayNum;
       document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
       if (clickedButton) {
         clickedButton.classList.add('active');
         clickedButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else {
         const buttons = document.querySelectorAll('.day-btn');
-        buttons[dayNum].classList.add('active');
-        buttons[dayNum].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        if (buttons[dayNum]) {
+          buttons[dayNum].classList.add('active');
+          buttons[dayNum].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
       }
 
       document.querySelectorAll('.stage-card').forEach(card => {
@@ -817,6 +825,45 @@
 
     function navigateToDay(dayNum) {
       switchTab(dayNum, null);
+    }
+
+    function initSwipeGestures() {
+      const container = document.getElementById('stageContainer');
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      container.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      container.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+
+        // Verifica che il movimento orizzontale sia prevalente rispetto a quello verticale
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+          if (diffX < 0) {
+            // Swipe da destra a sinistra -> Vai alla tappa successiva
+            if (currentDay < totalDays) {
+              switchTab(currentDay + 1, null);
+            }
+          } else {
+            // Swipe da sinistra a destra -> Vai alla tappa precedente
+            if (currentDay > 0) {
+              switchTab(currentDay - 1, null);
+            }
+          }
+        }
+      }
     }
 
     window.addEventListener('DOMContentLoaded', initNavigation);
