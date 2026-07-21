@@ -348,9 +348,7 @@
       color: #fff;
     }
 
-    /* Coordinate percentuali invariate per non toccare la mappa */
-    .pin-civitavecchia { top: 61%; left: 60%; }
-    .pin-vicopisano    { top: 54%; left: 56%; }
+    /* Coordinate percentuali mappa */
     .pin-antibes       { top: 51%; left: 47%; }
     .pin-malaucene     { top: 47%; left: 39%; }
     .pin-aurillac      { top: 40%; left: 35%; }
@@ -360,6 +358,7 @@
     .pin-ainsa         { top: 56%; left: 26%; }
     .pin-puigcerda     { top: 60%; left: 32%; }
     .pin-barcellona    { top: 68%; left: 33%; }
+    .pin-civitavecchia { top: 70%; left: 57%; }
 
     .metrics-summary-grid {
       display: grid;
@@ -422,23 +421,22 @@
         </div>
       </div>
       
-      <p class="description">Usa i link interattivi posizionati vicino alle città sulla mappa sottostante per saltare direttamente al giorno corrispondente.</p>
+      <p class="description">Usa i link interattivi posizionati sulla mappa sottostante per saltare direttamente al giorno corrispondente.</p>
       
       <div class="map-wrapper">
         <img src="Immagine1.png" alt="Mappa Raid Immagine1" class="map-img">
         
-        <!-- Link interattivi compatti e distanziati -->
-        <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-civitavecchia">Civitavecchia <span class="pin-badge">G1</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-vicopisano">Vicopisano <span class="pin-badge">G1</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-antibes">Antibes <span class="pin-badge">G1</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(2)" class="map-pin-link pin-malaucene">Malaucène <span class="pin-badge">G2</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(3)" class="map-pin-link pin-aurillac">Aurillac <span class="pin-badge">G3</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(4)" class="map-pin-link pin-bordeaux">Bordeaux <span class="pin-badge">G4</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(5)" class="map-pin-link pin-sansebastian">San Sebastián <span class="pin-badge">G5</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(6)" class="map-pin-link pin-pamplona">Pamplona <span class="pin-badge">G6</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(7)" class="map-pin-link pin-ainsa">Aínsa <span class="pin-badge">G7</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(8)" class="map-pin-link pin-puigcerda">Puigcerdà <span class="pin-badge">G8</span></a>
-        <a href="javascript:void(0)" onclick="navigateToDay(9)" class="map-pin-link pin-barcellona">Barcellona <span class="pin-badge">G9</span></a>
+        <!-- Link interattivi con badge numerici -->
+        <a href="javascript:void(0)" onclick="navigateToDay(1)" class="map-pin-link pin-antibes"><span class="pin-badge">G1</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(2)" class="map-pin-link pin-malaucene"><span class="pin-badge">G2</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(3)" class="map-pin-link pin-aurillac"><span class="pin-badge">G3</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(4)" class="map-pin-link pin-bordeaux"><span class="pin-badge">G4</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(5)" class="map-pin-link pin-sansebastian"><span class="pin-badge">G5</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(6)" class="map-pin-link pin-pamplona"><span class="pin-badge">G6</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(7)" class="map-pin-link pin-ainsa"><span class="pin-badge">G7</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(8)" class="map-pin-link pin-puigcerda"><span class="pin-badge">G8</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(9)" class="map-pin-link pin-barcellona"><span class="pin-badge">G9</span></a>
+        <a href="javascript:void(0)" onclick="navigateToDay(10)" class="map-pin-link pin-civitavecchia"><span class="pin-badge">G10</span></a>
       </div>
     </div>
     
@@ -469,6 +467,10 @@
           <li><strong>Antibes (Vieille Ville)</strong>: Racchiusa dai bastioni cinquecenteschi progettati da Vauban, ospita il porto turistico più grande d'Europa. Ottima occasione culinaria serale per assaggiare la cucina provenzale a base di *Aioli* e pesce fresco.</li>
         </ul>
       </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G1.png" alt="Tappa G1" class="map-img">
+      </div>
     </div>
 
     <!-- Giorno 2 -->
@@ -497,6 +499,10 @@
           <li><strong>Moustiers-Sainte-Marie</strong>: Borgo arroccato tra due maestose rupi rocciose, famoso per la produzione artigianale di maioliche smaltate e per il *Miele di lavanda della Provenza*, dal profumo aromatico e inconfondibile.</li>
           <li><strong>Mont Ventoux (1912m)</strong>: Il Gigante della Provenza si distingue per il suo spettrale paesaggio sommitale in pietra calcarea bianca, battuto da venti fortissimi. La zona circostante è rinomata per il *Tartufo nero del Ventoux* e i vini AOC Ventoux.</li>
         </ul>
+      </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G2.png" alt="Tappa G2" class="map-img">
       </div>
     </div>
 
@@ -527,6 +533,10 @@
           <li><strong>Aurillac &amp; Montagne del Cantal</strong>: Cuore pulsante dell'Alvernia vulcanica. La cucina locale ruota attorno al *Formaggio Cantal DOP* (vaccino a pasta pressata) e alla *Truffade*, un piatto unico a base di patate saltate nel lardo e mantecate con formaggio Toma fresca.</li>
         </ul>
       </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G3.png" alt="Tappa G3" class="map-img">
+      </div>
     </div>
 
     <!-- Giorno 4 -->
@@ -555,6 +565,10 @@
           <li><strong>Sarlat-la-Canéda</strong>: Cittadina medievale monumentale intatta, caratterizzata da tetti in pietra calcarea (*lauzes*). Sosta ideale per assaggiare le *Pommes de terre sarladaises* (patate cotte nel grasso d'anatra con aglio e prezzemolo) e i funghi porcini locali.</li>
           <li><strong>Bordeaux</strong>: Capitale mondiale del vino, adagiata sulle sponde della Garonna. L'architettura settecentesca fa da cornice all'assaggio dei celebri vini rossi bordolesi e del *Canelé*, il dolce tipico caramellato aromatizzato al rum e vaniglia.</li>
         </ul>
+      </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G4.png" alt="Tappa G4" class="map-img">
       </div>
     </div>
 
@@ -585,6 +599,10 @@
           <li><strong>San Sebastián &amp; Parte Vieja</strong>: Arrivo nei Paesi Baschi spagnoli per la serata, con il rituale dei *Pintxos* nei vicoli del centro storico affacciati sulla magnifica baia di La Concha.</li>
         </ul>
       </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G5.png" alt="Tappa G5" class="map-img">
+      </div>
     </div>
 
     <!-- Giorno 6 -->
@@ -614,6 +632,10 @@
           <li><strong>Pamplona &amp; Plaza del Castillo</strong>: Arrivo nella capitale navarrese dopo la deviazione a sud. La serata invita all'assaggio dei *Pimientos del Piquillo* grigliati e ripieni, seguiti da un bicchiere di *Pacharán* (liquore locale alle prugnole).</li>
         </ul>
       </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G6.png" alt="Tappa G6" class="map-img">
+      </div>
     </div>
 
     <!-- Giorno 7 -->
@@ -642,6 +664,10 @@
           <li><strong>Jaca &amp; Alto Aragona</strong>: Antica capitale del regno d'Aragona, conserva una monumentale fortezza pentagonale cinquecentesca. A tavola domina il *Ternasco de Aragón IGP* (agnello da latte cucinato al forno con patate) e i dolci artigianali *Lazos di Jaca*.</li>
           <li><strong>Puerto de Cotefablo &amp; Aínsa</strong>: Il passo sulla N-260 taglia gole rocciose spettacolari. L'arrivo è ad Aínsa, borgo medievale arroccato alla confluenza di due fiumi. Da gustare i piatti a base di cacciagione e i funghi selvatici raccolti nei vicini boschi di Ordesa.</li>
         </ul>
+      </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G7.png" alt="Tappa G7" class="map-img">
       </div>
     </div>
 
@@ -673,6 +699,10 @@
           <li><strong>Sort &amp; Altopiano della Cerdanya</strong>: Discesa lungo il fiume Noguera Pallaresa (patria del rafting) fino all'ampia vallata soleggiata di Puigcerdà. Qui si produce il <em>Tupí</em> (formaggio fermentato in orci di terracotta con acquavite) ed è d'obbligo assaggiare il *Trinxat de la Cerdanya*, piatto tipico a base di verza invernale, patate e pancetta croccante (*cansalada*).</li>
         </ul>
       </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G8.png" alt="Tappa G8" class="map-img">
+      </div>
     </div>
 
     <!-- Giorno 9 -->
@@ -687,7 +717,7 @@
             <span class="total-km-badge">Progressivo: 2.598 Km</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/dir/Puigcerdà,+Spain/Ripoll,+Spain/Barcelona" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
+            <a href="https://www.google.com/maps/dir/Puigcerdà,+Girona,+Spagna/Ripoll,+Girona,+Spagna/Barcellona,+Spagna" target="_blank" class="btn-action btn-maps" title="Mappa Google Maps"><span>🗺️</span></a>
             <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Barcellona"><span>☀️</span></a>
           </div>
         </div>
@@ -701,26 +731,30 @@
           <li><strong>Barcellona &amp; Cucina Marina</strong>: Grande metropoli mediterranea dominata dal modernismo architettonico. Ideale per festeggiare la chiusura della tratta continentale con una autentica *Arròs Negre* (riso al nero di seppia) o *Tapas* assortite nei mercati storici.</li>
         </ul>
       </div>
+
+      <div class="map-wrapper" style="margin-top: 16px;">
+        <img src="Tappa G9.png" alt="Tappa G9" class="map-img">
+      </div>
     </div>
 
     <!-- Giorno 10 -->
     <div class="stage-card" data-day="10">
       <span class="meta-badge">20-21 Agosto · Giorno 10</span>
-      <h2 class="route-title">Barcellona (Relax &amp; Imbarco)</h2>
+      <h2 class="route-title">Barcellona ➔ Civitavecchia</h2>
       <div class="route-info">
-        <div><span>🇪🇸 ➔ 🇮🇹 Rientro via mare</span></div>
+        <div><span>🇪🇸 ➔ 🇮🇹 Rientro via mare (Civitavecchia, Italia)</span></div>
         <div class="route-metrics-row">
           <div class="metrics-left">
             <span class="metric-item">🚢 <strong>Tragitto in Nave</strong> · 🕒 <strong>Partenza ore 22:45</strong></span>
             <span class="total-km-badge">Fine Raid Moto</span>
           </div>
           <div class="action-buttons-3d">
-            <a href="https://www.google.com/maps/search/Porto+di+Barcellona" target="_blank" class="btn-action btn-maps" title="Mappa Porto Barcellona"><span>🗺️</span></a>
-            <a href="https://www.3bmeteo.com/meteo/barcellona/spagna" target="_blank" class="btn-action btn-weather" title="Meteo Barcellona"><span>☀️</span></a>
+            <a href="https://www.google.com/maps/dir/Port+de+Barcelona,+Barcelona,+Spagna/Porto+di+Civitavecchia,+Civitavecchia,+RM,+Italia" target="_blank" class="btn-action btn-maps" title="Mappa Rotta Nave Barcellona-Civitavecchia"><span>🗺️</span></a>
+            <a href="https://www.3bmeteo.com/meteo/civitavecchia/italia" target="_blank" class="btn-action btn-weather" title="Meteo Civitavecchia"><span>☀️</span></a>
           </div>
         </div>
       </div>
-      <p class="description">Giornata di totale relax a Barcellona per godersi la città senza impegni in moto, passeggiando tra le Ramblas, il Barrio Gótico o rilassandosi in spiaggia, in attesa dell'imbarco serale per il rientro in Italia.</p>
+      <p class="description">Giornata di totale relax a Barcellona per godersi la città senza impegni in moto, passeggiando tra le Ramblas, il Barrio Gótico o rilassandosi in spiaggia, in attesa dell'imbarco serale sulla rotta per Civitavecchia, porto d'approdo vicino Roma.</p>
       
       <div class="attractions-box">
         <h3>Dettagli e Preventivo Viaggio di Ritorno (Nave)</h3>
@@ -753,7 +787,6 @@
       for (let i = 1; i <= totalDays; i++) {
         const btn = document.createElement('button');
         btn.className = 'day-btn';
-        btn.innerText = `G5`; // Nota: viene mantenuto G1-G10 dinamico tramite il ciclo
         btn.innerText = `G${i}`;
         btn.onclick = () => switchTab(i, btn);
         selector.appendChild(btn);
